@@ -6,4 +6,4 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [com.novemberain/monger "1.2.0"]
                  [robbit "1.0.0-SNAPSHOT"]
-                 [com.taoensso/carmine "0.10.1"]])
+                 [com.draines/postal "1.8.0"]])
