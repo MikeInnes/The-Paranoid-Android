@@ -19,9 +19,9 @@
       (mg/connect!) (mg/set-db! (mg/get-db "local")))))
 
 (defn start []
-  ;(add-watch robbit/log-str :email  (fn [_ _ _ s]
-  ;                                    (sendmail {:to   "mike.j.innes@gmail.com"
-  ;                                               :from "bots"
-  ;                                               :subject "bot logs"
-  ;                                               :body s})))
+  (add-watch robbit/log-str :email  (fn [_ _ _ s]
+                                      (sendmail {:to   "mike.j.innes@gmail.com"
+                                                 :from "bots"
+                                                 :subject "bot logs"
+                                                 :body s})))
   (robbit/start scp-bot))
