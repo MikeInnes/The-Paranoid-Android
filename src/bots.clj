@@ -1,0 +1,3 @@
+(ns bots)
+
+(defn start [])

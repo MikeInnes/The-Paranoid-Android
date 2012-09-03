@@ -1,0 +1,1 @@
+bots: lein run -m bots/start
