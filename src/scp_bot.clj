@@ -49,6 +49,7 @@
 (def scp-bot
   {:handler      (comp scp-reply :body)
    :user-agent   "/r/scp helper by /u/one_more_minute"
-   :subreddits   "sandbox"
+   :subreddits   "scp"
    :login        (reddit/login "The-Paranoid-Android" "imsoodepressed")
+   :log          (comp println str)
   })
