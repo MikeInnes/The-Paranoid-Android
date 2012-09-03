@@ -23,5 +23,5 @@
                                       (sendmail {:to   "mike.j.innes@gmail.com"
                                                  :from "bots"
                                                  :subject "bot logs"
-                                                 :body s}))
+                                                 :body s})))
   (robbit/start scp-bot))

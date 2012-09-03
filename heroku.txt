@@ -1,102 +1,101 @@
-2012-09-03T21:27:11+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
-2012-09-03T21:27:11+00:00 heroku[bots.1]: State changed from starting to up
-2012-09-03T21:27:21+00:00 app[bots.1]: {"The-Paranoid-Android" {:subreddits "sandbox", :interval 5, :last-run #<Atom@2013706e: "2012-09-03 21:27:21">, :user-agent "/r/scp helper by /u/one_more_minute", :login {:name "The-Paranoid-Android", :cookies {"reddit_session" {:discard true, :domain "reddit.com", :path "/", :value "14542954%2C2012-09-03T14%3A27%3A20%2C0b03a7d1c5c152ef802ef2a7a73eb991e160fe81", :version 0}, "reddit_first" {:domain "reddit.com", :expires #inst "2037-12-31T23:59:59.000-00:00", :path "/", :value "%7B%22firsttime%22%3A%20%22first%22%7D", :version 0}}, :modhash "mwwt8kunaa5262d9f5e23c3b6af58a0330cd5ede8297933901"}, :cancelled #<Atom@5a0d2bee: false>, :type :comment, :debug false, :handler #<core$comp$fn__4034 clojure.core$comp$fn__4034@19db3e20>}}
-2012-09-03T21:27:22+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
-2012-09-03T21:27:22+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/favicon.ico dyno= queue= wait= service= status=503 bytes=
-2012-09-03T21:27:53+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/robots.txt dyno= queue= wait= service= status=503 bytes=
-2012-09-03T21:27:53+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
-2012-09-03T21:28:22+00:00 heroku[bots.1]: Process exited with status 0
-2012-09-03T21:28:22+00:00 heroku[bots.1]: State changed from up to crashed
-2012-09-03T21:28:22+00:00 heroku[bots.1]: State changed from crashed to starting
-2012-09-03T21:28:24+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
-2012-09-03T21:28:24+00:00 heroku[bots.1]: State changed from starting to up
-2012-09-03T21:28:35+00:00 app[bots.1]: {"The-Paranoid-Android" {:subreddits "sandbox", :interval 5, :last-run #<Atom@4e877a44: "2012-09-03 21:28:35">, :user-agent "/r/scp helper by /u/one_more_minute", :login {:name "The-Paranoid-Android", :cookies {"reddit_session" {:discard true, :domain "reddit.com", :path "/", :value "14542954%2C2012-09-03T14%3A28%3A35%2C3cec5a0dd884f5ce1b2361b7cdfc9495ca5c78ec", :version 0}, "reddit_first" {:domain "reddit.com", :expires #inst "2037-12-31T23:59:59.000-00:00", :path "/", :value "%7B%22firsttime%22%3A%20%22first%22%7D", :version 0}}, :modhash "g8f6rs44uu2fd6f630ada25b2de7081dfb9428b805d38fbfca"}, :cancelled #<Atom@34feb215: false>, :type :comment, :debug false, :handler #<core$comp$fn__4034 clojure.core$comp$fn__4034@6099210f>}}
-2012-09-03T21:28:53+00:00 heroku[bots.1]: State changed from up to down
-2012-09-03T21:28:53+00:00 heroku[api]: Scale to bots=0 by mike.j.innes@gmail.com
-2012-09-03T21:28:59+00:00 heroku[bots.1]: Stopping all processes with SIGTERM
-2012-09-03T21:29:03+00:00 heroku[bots.1]: Process exited with status 143
-2012-09-03T21:31:26+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
-2012-09-03T21:31:45+00:00 heroku[run.1]: Awaiting client
-2012-09-03T21:31:45+00:00 heroku[run.1]: Starting process with command `lein repl`
-2012-09-03T21:31:46+00:00 heroku[run.1]: State changed from starting to up
-2012-09-03T21:36:54+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
-2012-09-03T21:36:56+00:00 heroku[run.1]: Process exited with status 129
-2012-09-03T21:36:56+00:00 heroku[run.1]: State changed from up to complete
-2012-09-03T21:37:48+00:00 heroku[slugc]: Slug compilation started
-2012-09-03T21:37:56+00:00 heroku[api]: Release v12 created by mike.j.innes@gmail.com
-2012-09-03T21:37:56+00:00 heroku[api]: Deploy cc2b40a by mike.j.innes@gmail.com
-2012-09-03T21:37:57+00:00 heroku[slugc]: Slug compilation finished
-2012-09-03T21:38:23+00:00 heroku[api]: Scale to bots=1 by mike.j.innes@gmail.com
-2012-09-03T21:38:25+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
-2012-09-03T21:38:26+00:00 heroku[bots.1]: State changed from starting to up
-2012-09-03T21:38:45+00:00 app[bots.1]: Exception in thread "main" java.lang.RuntimeException: Unable to resolve symbol: s in this context, compiling:(bots.clj:23)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6281)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$MapExpr.parse(Compiler.java:2827)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6270)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$InvokeExpr.parse(Compiler.java:3548)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6457)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$InvokeExpr.parse(Compiler.java:3548)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6457)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$BodyExpr$Parser.parse(Compiler.java:5618)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$FnMethod.parse(Compiler.java:5054)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$FnExpr.parse(Compiler.java:3674)
-2012-09-03T2
-1:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6453)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6443)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.access$100(Compiler.java:37)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$DefExpr$Parser.parse(Compiler.java:518)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6455)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6515)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.load(Compiler.java:6952)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:359)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:350)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:429)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:400)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load$fn__4890.invoke(core.clj:5415)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load.doInvoke(core.clj:5414)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load_one.invoke(core.clj:5227)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load_lib.doInvoke(core.clj:5264)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:142)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:137)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$require.doInvoke(core.clj:5381)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load_libs.doInvoke(core.clj:5298)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at user$eval1.invoke(NO_SOURCE_FILE:1)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6511)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6500)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6477)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$eval.invoke(core.clj:2797)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$eval_opt.invoke(main.clj:297)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$initialize.invoke(main.clj:316)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$null_opt.invoke(main.clj:349)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$main.doInvoke(main.clj:427)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:421)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Var.invoke(Var.java:419)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.AFn.applyToHelper(AFn.java:163)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Var.applyTo(Var.java:532)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main.main(main.java:37)
-2012-09-03T21:38:45+00:00 app[bots.1]: Caused by: java.lang.RuntimeException: Unable to resolve symbol: s in this context
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Util.runtimeException(Util.java:170)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.resolveIn(Compiler.java:6766)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.resolve(Compiler.java:6710)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSymbol(Compiler.java:6671)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6244)
-2012-09-03T21:38:45+00:00 app[bots.1]: 	... 56 more
-2012-09-03T21:38:47+00:00 heroku[bots.1]: Process exited with status 1
-2012-09-03T21:38:47+00:00 heroku[bots.1]: State changed from up to crashed
-2012-09-03T21:38:47+00:00 heroku[bots.1]: State changed from crashed to starting
-2012-09-03T21:38:50+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
-2012-09-03T21:38:51+00:00 heroku[bots.1]: State changed from starting to up
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler$BodyExpr$Parser.parse(Compiler.java:5618)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6453)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler$FnExpr.parse(Compiler.java:3674)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6443)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.access$100(Compiler.java:37)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler$DefExpr$Parser.parse(Compiler.java:518)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6455)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6515)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.load(Compiler.java:6952)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:359)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:350)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:429)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:400)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$load$fn__4890.invoke(core.clj:5415)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$load.doInvoke(core.clj:5414)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$load_one.invoke(core.clj:5227)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$load_lib.doInvoke(core.clj:5264)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$load_libs.doInvoke(core.clj:5298)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$require.doInvoke(core.clj:5381)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:137)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6511)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at user$eval1.invoke(NO_SOURCE_FILE:1)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6477)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.main$eval_opt.invoke(main.clj:297)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.main$initialize.invoke(main.clj:316)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.main$null_opt.invoke(main.clj:349)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.core$eval.invoke(core.clj:2797)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6500)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.main$main.doInvoke(main.clj:427)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:421)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Var.invoke(Var.java:419)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.AFn.applyToHelper(AFn.java:163)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Var.applyTo(Var.java:532)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.main.main(main.java:37)
+2012-09-03T21:39:36+00:00 app[bots.1]: Caused by: java.lang.RuntimeException: Unable to resolve symbol: s in this context
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Util.runtimeException(Util.java:170)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.resolveIn(Compiler.java:6766)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.resolve(Compiler.java:6710)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSymbol(Compiler.java:6671)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6244)
+2012-09-03T21:39:36+00:00 app[bots.1]: 	... 56 more
+2012-09-03T21:39:37+00:00 heroku[bots.1]: Process exited with status 1
+2012-09-03T21:39:37+00:00 heroku[bots.1]: State changed from up to crashed
+2012-09-03T21:40:43+00:00 heroku[slugc]: Slug compilation started
+2012-09-03T21:40:53+00:00 heroku[api]: Release v13 created by mike.j.innes@gmail.com
+2012-09-03T21:40:53+00:00 heroku[api]: Deploy 3a4adc2 by mike.j.innes@gmail.com
+2012-09-03T21:40:53+00:00 heroku[bots.1]: State changed from crashed to starting
+2012-09-03T21:40:53+00:00 heroku[slugc]: Slug compilation finished
+2012-09-03T21:40:56+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
+2012-09-03T21:40:56+00:00 heroku[bots.1]: State changed from starting to up
+2012-09-03T21:41:14+00:00 app[bots.1]: Exception in thread "main" java.lang.RuntimeException: EOF while reading, starting at line 21, compiling:(bots.clj:27)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Compiler.load(Compiler.java:6958)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:350)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:359)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:429)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:400)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$load$fn__4890.invoke(core.clj:5415)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$load.doInvoke(core.clj:5414)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$load_one.invoke(core.clj:5227)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$load_lib.doInvoke(core.clj:5264)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$load_libs.doInvoke(core.clj:5298)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:137)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$require.doInvoke(core.clj:5381)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at user$eval1.invoke(NO_SOURCE_FILE:1)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6511)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6500)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.core$eval.invoke(core.clj:2797)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6477)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.main$eval_opt.invoke(main.clj:297)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.main$initialize.invoke(main.clj:316)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.main$null_opt.invoke(main.clj:349)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.main$main.doInvoke(main.clj:427)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:421)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Var.invoke(Var.java:419)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.AFn.applyToHelper(AFn.java:163)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Var.applyTo(Var.java:532)
+2012-09-03T21:41:14+00:00 app[bots.1]: Caused by: java.lang.RuntimeException: EOF while reading, starting at line 21
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.main.main(main.java:37)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Util.runtimeException(Util.java:170)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.LispReader.readDelimitedList(LispReader.java:1117)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.LispReader.read(LispReader.java:180)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.LispReader$ListReader.invoke(LispReader.java:962)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	at clojure.lang.Compiler.load(Compiler.java:6949)
+2012-09-03T21:41:14+00:00 app[bots.1]: 	... 30 more
+2012-09-03T21:41:15+00:00 heroku[bots.1]: Process exited with status 1
+2012-09-03T21:41:15+00:00 heroku[bots.1]: State changed from up to crashed
