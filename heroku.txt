@@ -1,0 +1,101 @@
+2012-09-03T16:55:39+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
+2012-09-03T16:55:42+00:00 heroku[run.1]: Awaiting client
+2012-09-03T16:55:42+00:00 heroku[run.1]: Starting process with command `lein repl`
+2012-09-03T16:55:42+00:00 heroku[run.1]: State changed from starting to complete
+2012-09-03T16:55:43+00:00 heroku[run.1]: Process exited with status 127
+2012-09-03T16:56:09+00:00 heroku[slugc]: Slug compilation started
+2012-09-03T16:56:27+00:00 heroku[api]: Add LEIN_NO_DEV, PATH, JVM_OPTS config by mike.j.innes@gmail.com
+2012-09-03T16:56:27+00:00 heroku[api]: Release v3 created by mike.j.innes@gmail.com
+2012-09-03T16:56:28+00:00 heroku[api]: Release v4 created by mike.j.innes@gmail.com
+2012-09-03T16:56:28+00:00 heroku[api]: Deploy 61d2943 by mike.j.innes@gmail.com
+2012-09-03T16:56:28+00:00 heroku[slugc]: Slug compilation finished
+2012-09-03T16:56:29+00:00 heroku[web.1]: Starting process with command `lein trampoline run`
+2012-09-03T16:56:34+00:00 app[web.1]: No :main namespace specified in project.clj.
+2012-09-03T16:56:35+00:00 heroku[web.1]: Process exited with status 1
+2012-09-03T16:56:35+00:00 heroku[web.1]: State changed from starting to crashed
+2012-09-03T16:56:35+00:00 heroku[web.1]: State changed from crashed to starting
+2012-09-03T16:56:38+00:00 heroku[web.1]: Starting process with command `lein trampoline run`
+2012-09-03T16:56:42+00:00 app[web.1]: No :main namespace specified in project.clj.
+2012-09-03T16:56:43+00:00 heroku[web.1]: Process exited with status 1
+2012-09-03T16:56:43+00:00 heroku[web.1]: State changed from starting to crashed
+2012-09-03T16:57:05+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
+2012-09-03T16:57:06+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/favicon.ico dyno= queue= wait= service= status=503 bytes=
+2012-09-03T16:57:50+00:00 heroku[web.1]: State changed from crashed to down
+2012-09-03T16:57:50+00:00 heroku[api]: Scale to web=0 by mike.j.innes@gmail.com
+2012-09-03T16:58:42+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
+2012-09-03T16:58:45+00:00 heroku[run.1]: Awaiting client
+2012-09-03T16:58:45+00:00 heroku[run.1]: Starting process with command `lein repl`
+2012-09-03T16:58:47+00:00 heroku[run.1]: State changed from starting to up
+2012-09-03T17:16:06+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
+2012-09-03T17:16:07+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/favicon.ico dyno= queue= wait= service= status=503 bytes=
+2012-09-03T17:34:20+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
+2012-09-03T17:34:22+00:00 heroku[run.1]: Process exited with status 129
+2012-09-03T17:34:22+00:00 heroku[run.1]: State changed from up to complete
+2012-09-03T18:33:25+00:00 heroku[slugc]: Slug compilation started
+2012-09-03T18:33:34+00:00 heroku[api]: Release v5 created by mike.j.innes@gmail.com
+2012-09-03T18:33:34+00:00 heroku[api]: Deploy 91c63c9 by mike.j.innes@gmail.com
+2012-09-03T18:33:34+00:00 heroku[slugc]: Slug compilation finished
+2012-09-03T18:36:18+00:00 heroku[api]: Add redistogo:nano add-on by mike.j.innes@gmail.com
+2012-09-03T18:36:18+00:00 heroku[api]: Release v6 created by mike.j.innes@gmail.com
+2012-09-03T18:38:25+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
+2012-09-03T18:38:27+00:00 heroku[run.1]: Awaiting client
+2012-09-03T18:38:27+00:00 heroku[run.1]: Starting process with command `lein repl`
+2012-09-03T18:38:28+00:00 heroku[run.1]: State changed from starting to up
+2012-09-03T18:47:17+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
+2012-09-03T18:47:19+00:00 heroku[run.1]: Process exited with status 129
+2012-09-03T18:47:19+00:00 heroku[run.1]: State changed from up to complete
+2012-09-03T18:50:10+00:00 heroku[slugc]: Slug compilation started
+2012-09-03T18:50:22+00:00 heroku[api]: Release v7 created by mike.j.innes@gmail.com
+2012-09-03T18:50:22+00:00 heroku[api]: Deploy 3d266e8 by mike.j.innes@gmail.com
+2012-09-03T18:50:22+00:00 heroku[slugc]: Slug compilation finished
+2012-09-03T18:51:00+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
+2012-09-03T18:51:05+00:00 heroku[run.1]: Awaiting client
+2012-09-03T18:51:05+00:00 heroku[run.1]: Starting process with command `lein repl`
+2012-09-03T18:51:06+00:00 heroku[run.1]: State changed from starting to up
+2012-09-03T18:57:35+00:00 heroku[api]: Remove redistogo:nano add-on by mike.j.innes@gmail.com
+2012-09-03T18:57:35+00:00 heroku[api]: Release v8 created by mike.j.innes@gmail.com
+2012-09-03T19:08:37+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
+2012-09-03T19:08:40+00:00 heroku[run.1]: Process exited with status 129
+2012-09-03T19:08:40+00:00 heroku[run.1]: State changed from up to complete
+2012-09-03T19:26:38+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
+2012-09-03T19:26:43+00:00 heroku[run.1]: Awaiting client
+2012-09-03T19:26:43+00:00 heroku[run.1]: Starting process with command `lein repl`
+2012-09-03T19:26:44+00:00 heroku[run.1]: State changed from starting to up
+2012-09-03T19:52:04+00:00 heroku[api]: Add sendgrid:starter add-on by mike.j.innes@gmail.com
+2012-09-03T19:52:05+00:00 heroku[api]: Release v9 created by mike.j.innes@gmail.com
+2012-09-03T19:59:57+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
+2012-09-03T19:59:59+00:00 heroku[run.1]: Process exited with status 129
+2012-09-03T19:59:59+00:00 heroku[run.1]: State changed from up to complete
+2012-09-03T20:01:15+00:00 heroku[slugc]: Slug compilation started
+2012-09-03T20:01:35+00:00 heroku[api]: Release v10 created by mike.j.innes@gmail.com
+2012-09-03T20:01:35+00:00 heroku[api]: Deploy a7d9b74 by mike.j.innes@gmail.com
+2012-09-03T20:01:35+00:00 heroku[slugc]: Slug compilation finished
+2012-09-03T20:02:14+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
+2012-09-03T20:02:17+00:00 heroku[run.1]: Starting process with command `lein repl`
+2012-09-03T20:02:17+00:00 heroku[run.1]: Awaiting client
+2012-09-03T20:02:18+00:00 heroku[run.1]: State changed from starting to up
+2012-09-03T20:16:05+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
+2012-09-03T20:16:06+00:00 heroku[run.1]: Process exited with status 129
+2012-09-03T20:16:06+00:00 heroku[run.1]: State changed from up to complete
+2012-09-03T21:26:11+00:00 heroku[slugc]: Slug compilation started
+2012-09-03T21:26:23+00:00 heroku[api]: Release v11 created by mike.j.innes@gmail.com
+2012-09-03T21:26:23+00:00 heroku[api]: Deploy 3fa2dd2 by mike.j.innes@gmail.com
+2012-09-03T21:26:24+00:00 heroku[slugc]: Slug compilation finished
+2012-09-03T21:27:09+00:00 heroku[api]: Scale to bots=1 by mike.j.innes@gmail.com
+2012-09-03T21:27:11+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
+2012-09-03T21:27:11+00:00 heroku[bots.1]: State changed from starting to up
+2012-09-03T21:27:21+00:00 app[bots.1]: {"The-Paranoid-Android" {:subreddits "sandbox", :interval 5, :last-run #<Atom@2013706e: "2012-09-03 21:27:21">, :user-agent "/r/scp helper by /u/one_more_minute", :login {:name "The-Paranoid-Android", :cookies {"reddit_session" {:discard true, :domain "reddit.com", :path "/", :value "14542954%2C2012-09-03T14%3A27%3A20%2C0b03a7d1c5c152ef802ef2a7a73eb991e160fe81", :version 0}, "reddit_first" {:domain "reddit.com", :expires #inst "2037-12-31T23:59:59.000-00:00", :path "/", :value "%7B%22firsttime%22%3A%20%22first%22%7D", :version 0}}, :modhash "mwwt8kunaa5262d9f5e23c3b6af58a0330cd5ede8297933901"}, :cancelled #<Atom@5a0d2bee: false>, :type :comment, :debug false, :handler #<core$comp$fn__4034 clojure.core$comp$fn__4034@19db3e20>}}
+2012-09-03T21:27:22+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
+2012-09-03T21:27:22+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/favicon.ico dyno= queue= wait= service= status=503 bytes=
+2012-09-03T21:27:53+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/robots.txt dyno= queue= wait= service= status=503 bytes=
+2012-09-03T21:27:53+00:00 heroku[router]: Error H14 (No web processes running) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
+2012-09-03T21:28:22+00:00 heroku[bots.1]: Process exited with status 0
+2012-09-03T21:28:22+00:00 heroku[bots.1]: State changed from up to crashed
+2012-09-03T21:28:22+00:00 heroku[bots.1]: State changed from crashed to starting
+2012-09-03T21:28:24+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
+2012-09-03T21:28:24+00:00 heroku[bots.1]: State changed from starting to up
+2012-09-03T21:28:35+00:00 app[bots.1]: {"The-Paranoid-Android" {:subreddits "sandbox", :interval 5, :last-run #<Atom@4e877a44: "2012-09-03 21:28:35">, :user-agent "/r/scp helper by /u/one_more_minute", :login {:name "The-Paranoid-Android", :cookies {"reddit_session" {:discard true, :domain "reddit.com", :path "/", :value "14542954%2C2012-09-03T14%3A28%3A35%2C3cec5a0dd884f5ce1b2361b7cdfc9495ca5c78ec", :version 0}, "reddit_first" {:domain "reddit.com", :expires #inst "2037-12-31T23:59:59.000-00:00", :path "/", :value "%7B%22firsttime%22%3A%20%22first%22%7D", :version 0}}, :modhash "g8f6rs44uu2fd6f630ada25b2de7081dfb9428b805d38fbfca"}, :cancelled #<Atom@34feb215: false>, :type :comment, :debug false, :handler #<core$comp$fn__4034 clojure.core$comp$fn__4034@6099210f>}}
+2012-09-03T21:28:53+00:00 heroku[bots.1]: State changed from up to down
+2012-09-03T21:28:53+00:00 heroku[api]: Scale to bots=0 by mike.j.innes@gmail.com
+2012-09-03T21:28:59+00:00 heroku[bots.1]: Stopping all processes with SIGTERM
+2012-09-03T21:29:03+00:00 heroku[bots.1]: Process exited with status 143
