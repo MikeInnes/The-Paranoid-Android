@@ -5,4 +5,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [com.novemberain/monger "1.2.0"]
-                 [robbit "1.0.0-SNAPSHOT"]])
+                 [robbit "1.0.0-SNAPSHOT"]
+                 [carmine "0.8.3-SNAPSHOT"]])
