@@ -1,87 +1,3 @@
-2012-09-03T16:55:39+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
-2012-09-03T16:55:42+00:00 heroku[run.1]: Awaiting client
-2012-09-03T16:55:42+00:00 heroku[run.1]: Starting process with command `lein repl`
-2012-09-03T16:55:42+00:00 heroku[run.1]: State changed from starting to complete
-2012-09-03T16:55:43+00:00 heroku[run.1]: Process exited with status 127
-2012-09-03T16:56:09+00:00 heroku[slugc]: Slug compilation started
-2012-09-03T16:56:27+00:00 heroku[api]: Add LEIN_NO_DEV, PATH, JVM_OPTS config by mike.j.innes@gmail.com
-2012-09-03T16:56:27+00:00 heroku[api]: Release v3 created by mike.j.innes@gmail.com
-2012-09-03T16:56:28+00:00 heroku[api]: Release v4 created by mike.j.innes@gmail.com
-2012-09-03T16:56:28+00:00 heroku[api]: Deploy 61d2943 by mike.j.innes@gmail.com
-2012-09-03T16:56:28+00:00 heroku[slugc]: Slug compilation finished
-2012-09-03T16:56:29+00:00 heroku[web.1]: Starting process with command `lein trampoline run`
-2012-09-03T16:56:34+00:00 app[web.1]: No :main namespace specified in project.clj.
-2012-09-03T16:56:35+00:00 heroku[web.1]: Process exited with status 1
-2012-09-03T16:56:35+00:00 heroku[web.1]: State changed from starting to crashed
-2012-09-03T16:56:35+00:00 heroku[web.1]: State changed from crashed to starting
-2012-09-03T16:56:38+00:00 heroku[web.1]: Starting process with command `lein trampoline run`
-2012-09-03T16:56:42+00:00 app[web.1]: No :main namespace specified in project.clj.
-2012-09-03T16:56:43+00:00 heroku[web.1]: Process exited with status 1
-2012-09-03T16:56:43+00:00 heroku[web.1]: State changed from starting to crashed
-2012-09-03T16:57:05+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
-2012-09-03T16:57:06+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/favicon.ico dyno= queue= wait= service= status=503 bytes=
-2012-09-03T16:57:50+00:00 heroku[web.1]: State changed from crashed to down
-2012-09-03T16:57:50+00:00 heroku[api]: Scale to web=0 by mike.j.innes@gmail.com
-2012-09-03T16:58:42+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
-2012-09-03T16:58:45+00:00 heroku[run.1]: Awaiting client
-2012-09-03T16:58:45+00:00 heroku[run.1]: Starting process with command `lein repl`
-2012-09-03T16:58:47+00:00 heroku[run.1]: State changed from starting to up
-2012-09-03T17:16:06+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/ dyno= queue= wait= service= status=503 bytes=
-2012-09-03T17:16:07+00:00 heroku[router]: Error H10 (App crashed) -> GET mysterious-coast-2921.herokuapp.com/favicon.ico dyno= queue= wait= service= status=503 bytes=
-2012-09-03T17:34:20+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
-2012-09-03T17:34:22+00:00 heroku[run.1]: Process exited with status 129
-2012-09-03T17:34:22+00:00 heroku[run.1]: State changed from up to complete
-2012-09-03T18:33:25+00:00 heroku[slugc]: Slug compilation started
-2012-09-03T18:33:34+00:00 heroku[api]: Release v5 created by mike.j.innes@gmail.com
-2012-09-03T18:33:34+00:00 heroku[api]: Deploy 91c63c9 by mike.j.innes@gmail.com
-2012-09-03T18:33:34+00:00 heroku[slugc]: Slug compilation finished
-2012-09-03T18:36:18+00:00 heroku[api]: Add redistogo:nano add-on by mike.j.innes@gmail.com
-2012-09-03T18:36:18+00:00 heroku[api]: Release v6 created by mike.j.innes@gmail.com
-2012-09-03T18:38:25+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
-2012-09-03T18:38:27+00:00 heroku[run.1]: Awaiting client
-2012-09-03T18:38:27+00:00 heroku[run.1]: Starting process with command `lein repl`
-2012-09-03T18:38:28+00:00 heroku[run.1]: State changed from starting to up
-2012-09-03T18:47:17+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
-2012-09-03T18:47:19+00:00 heroku[run.1]: Process exited with status 129
-2012-09-03T18:47:19+00:00 heroku[run.1]: State changed from up to complete
-2012-09-03T18:50:10+00:00 heroku[slugc]: Slug compilation started
-2012-09-03T18:50:22+00:00 heroku[api]: Release v7 created by mike.j.innes@gmail.com
-2012-09-03T18:50:22+00:00 heroku[api]: Deploy 3d266e8 by mike.j.innes@gmail.com
-2012-09-03T18:50:22+00:00 heroku[slugc]: Slug compilation finished
-2012-09-03T18:51:00+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
-2012-09-03T18:51:05+00:00 heroku[run.1]: Awaiting client
-2012-09-03T18:51:05+00:00 heroku[run.1]: Starting process with command `lein repl`
-2012-09-03T18:51:06+00:00 heroku[run.1]: State changed from starting to up
-2012-09-03T18:57:35+00:00 heroku[api]: Remove redistogo:nano add-on by mike.j.innes@gmail.com
-2012-09-03T18:57:35+00:00 heroku[api]: Release v8 created by mike.j.innes@gmail.com
-2012-09-03T19:08:37+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
-2012-09-03T19:08:40+00:00 heroku[run.1]: Process exited with status 129
-2012-09-03T19:08:40+00:00 heroku[run.1]: State changed from up to complete
-2012-09-03T19:26:38+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
-2012-09-03T19:26:43+00:00 heroku[run.1]: Awaiting client
-2012-09-03T19:26:43+00:00 heroku[run.1]: Starting process with command `lein repl`
-2012-09-03T19:26:44+00:00 heroku[run.1]: State changed from starting to up
-2012-09-03T19:52:04+00:00 heroku[api]: Add sendgrid:starter add-on by mike.j.innes@gmail.com
-2012-09-03T19:52:05+00:00 heroku[api]: Release v9 created by mike.j.innes@gmail.com
-2012-09-03T19:59:57+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
-2012-09-03T19:59:59+00:00 heroku[run.1]: Process exited with status 129
-2012-09-03T19:59:59+00:00 heroku[run.1]: State changed from up to complete
-2012-09-03T20:01:15+00:00 heroku[slugc]: Slug compilation started
-2012-09-03T20:01:35+00:00 heroku[api]: Release v10 created by mike.j.innes@gmail.com
-2012-09-03T20:01:35+00:00 heroku[api]: Deploy a7d9b74 by mike.j.innes@gmail.com
-2012-09-03T20:01:35+00:00 heroku[slugc]: Slug compilation finished
-2012-09-03T20:02:14+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
-2012-09-03T20:02:17+00:00 heroku[run.1]: Starting process with command `lein repl`
-2012-09-03T20:02:17+00:00 heroku[run.1]: Awaiting client
-2012-09-03T20:02:18+00:00 heroku[run.1]: State changed from starting to up
-2012-09-03T20:16:05+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
-2012-09-03T20:16:06+00:00 heroku[run.1]: Process exited with status 129
-2012-09-03T20:16:06+00:00 heroku[run.1]: State changed from up to complete
-2012-09-03T21:26:11+00:00 heroku[slugc]: Slug compilation started
-2012-09-03T21:26:23+00:00 heroku[api]: Release v11 created by mike.j.innes@gmail.com
-2012-09-03T21:26:23+00:00 heroku[api]: Deploy 3fa2dd2 by mike.j.innes@gmail.com
-2012-09-03T21:26:24+00:00 heroku[slugc]: Slug compilation finished
-2012-09-03T21:27:09+00:00 heroku[api]: Scale to bots=1 by mike.j.innes@gmail.com
 2012-09-03T21:27:11+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
 2012-09-03T21:27:11+00:00 heroku[bots.1]: State changed from starting to up
 2012-09-03T21:27:21+00:00 app[bots.1]: {"The-Paranoid-Android" {:subreddits "sandbox", :interval 5, :last-run #<Atom@2013706e: "2012-09-03 21:27:21">, :user-agent "/r/scp helper by /u/one_more_minute", :login {:name "The-Paranoid-Android", :cookies {"reddit_session" {:discard true, :domain "reddit.com", :path "/", :value "14542954%2C2012-09-03T14%3A27%3A20%2C0b03a7d1c5c152ef802ef2a7a73eb991e160fe81", :version 0}, "reddit_first" {:domain "reddit.com", :expires #inst "2037-12-31T23:59:59.000-00:00", :path "/", :value "%7B%22firsttime%22%3A%20%22first%22%7D", :version 0}}, :modhash "mwwt8kunaa5262d9f5e23c3b6af58a0330cd5ede8297933901"}, :cancelled #<Atom@5a0d2bee: false>, :type :comment, :debug false, :handler #<core$comp$fn__4034 clojure.core$comp$fn__4034@19db3e20>}}
@@ -99,3 +15,88 @@
 2012-09-03T21:28:53+00:00 heroku[api]: Scale to bots=0 by mike.j.innes@gmail.com
 2012-09-03T21:28:59+00:00 heroku[bots.1]: Stopping all processes with SIGTERM
 2012-09-03T21:29:03+00:00 heroku[bots.1]: Process exited with status 143
+2012-09-03T21:31:26+00:00 heroku[api]: Starting process with command `lein repl` by mike.j.innes@gmail.com
+2012-09-03T21:31:45+00:00 heroku[run.1]: Awaiting client
+2012-09-03T21:31:45+00:00 heroku[run.1]: Starting process with command `lein repl`
+2012-09-03T21:31:46+00:00 heroku[run.1]: State changed from starting to up
+2012-09-03T21:36:54+00:00 heroku[run.1]: Client connection closed. Sending SIGHUP to all processes
+2012-09-03T21:36:56+00:00 heroku[run.1]: Process exited with status 129
+2012-09-03T21:36:56+00:00 heroku[run.1]: State changed from up to complete
+2012-09-03T21:37:48+00:00 heroku[slugc]: Slug compilation started
+2012-09-03T21:37:56+00:00 heroku[api]: Release v12 created by mike.j.innes@gmail.com
+2012-09-03T21:37:56+00:00 heroku[api]: Deploy cc2b40a by mike.j.innes@gmail.com
+2012-09-03T21:37:57+00:00 heroku[slugc]: Slug compilation finished
+2012-09-03T21:38:23+00:00 heroku[api]: Scale to bots=1 by mike.j.innes@gmail.com
+2012-09-03T21:38:25+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
+2012-09-03T21:38:26+00:00 heroku[bots.1]: State changed from starting to up
+2012-09-03T21:38:45+00:00 app[bots.1]: Exception in thread "main" java.lang.RuntimeException: Unable to resolve symbol: s in this context, compiling:(bots.clj:23)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6281)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$MapExpr.parse(Compiler.java:2827)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6270)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$InvokeExpr.parse(Compiler.java:3548)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6457)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$InvokeExpr.parse(Compiler.java:3548)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6457)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$BodyExpr$Parser.parse(Compiler.java:5618)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$FnMethod.parse(Compiler.java:5054)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$FnExpr.parse(Compiler.java:3674)
+2012-09-03T2
+1:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6453)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6443)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.access$100(Compiler.java:37)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler$DefExpr$Parser.parse(Compiler.java:518)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6262)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6455)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6223)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6515)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.load(Compiler.java:6952)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:359)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.loadResourceScript(RT.java:350)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:429)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RT.load(RT.java:400)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load$fn__4890.invoke(core.clj:5415)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load.doInvoke(core.clj:5414)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load_one.invoke(core.clj:5227)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load_lib.doInvoke(core.clj:5264)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.applyTo(RestFn.java:137)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$apply.invoke(core.clj:603)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$require.doInvoke(core.clj:5381)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$load_libs.doInvoke(core.clj:5298)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:408)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at user$eval1.invoke(NO_SOURCE_FILE:1)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6511)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6500)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.eval(Compiler.java:6477)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.core$eval.invoke(core.clj:2797)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$eval_opt.invoke(main.clj:297)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$initialize.invoke(main.clj:316)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$null_opt.invoke(main.clj:349)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main$main.doInvoke(main.clj:427)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.RestFn.invoke(RestFn.java:421)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Var.invoke(Var.java:419)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.AFn.applyToHelper(AFn.java:163)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Var.applyTo(Var.java:532)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.main.main(main.java:37)
+2012-09-03T21:38:45+00:00 app[bots.1]: Caused by: java.lang.RuntimeException: Unable to resolve symbol: s in this context
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Util.runtimeException(Util.java:170)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.resolveIn(Compiler.java:6766)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.resolve(Compiler.java:6710)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyzeSymbol(Compiler.java:6671)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	at clojure.lang.Compiler.analyze(Compiler.java:6244)
+2012-09-03T21:38:45+00:00 app[bots.1]: 	... 56 more
+2012-09-03T21:38:47+00:00 heroku[bots.1]: Process exited with status 1
+2012-09-03T21:38:47+00:00 heroku[bots.1]: State changed from up to crashed
+2012-09-03T21:38:47+00:00 heroku[bots.1]: State changed from crashed to starting
+2012-09-03T21:38:50+00:00 heroku[bots.1]: Starting process with command `lein run -m bots/start`
+2012-09-03T21:38:51+00:00 heroku[bots.1]: State changed from starting to up
