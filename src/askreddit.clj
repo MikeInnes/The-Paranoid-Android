@@ -10,7 +10,7 @@
   "Brain the size of a planet, and I have to tell people off for not putting questions in their titles. Just do it, and maybe I can go solve global warming or something instead."])
 
 (defn handler [title]
-  (if-not (re-find #"(?i)(?:\?|which|how|who|where|why|what|please|help|can)" title)
+  (if-not (re-find #"(?i)(?:\?|which|how|who|where|why|what|please|help|can|need|advice|is)" title)
     {:reply (rand-nth responses)
      :vote  :down}))
 

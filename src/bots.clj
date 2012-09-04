@@ -21,4 +21,4 @@
 
 (defn start []
   (robbit/start scp-bot       :scp-bot)
-  (robbit/start askreddit-bot :askreddit))
+  #_(robbit/start askreddit-bot :askreddit))
