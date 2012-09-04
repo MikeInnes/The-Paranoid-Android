@@ -13,8 +13,7 @@
   (if-not (re-find #"(?i)(?:\?|which|how|who|where|why|what|please|can|is)" title)
     {:reply (str "Just a friendly reminder to put a thought-provoking question in your title, as per the rules in the sidebar.\n\n"
                  "This is an experimental bot, so it might get things wrong - sorry if it did, but next time "
-                 "please try and get a question mark in.")
-     :vote  :down}))
+                 "please try and get a question mark in.")}))
 
 (def askreddit-bot
   {:handler      (comp handler :title)
