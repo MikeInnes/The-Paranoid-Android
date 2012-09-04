@@ -2,7 +2,7 @@
   (:require [monger.core :as mg]
             [postal.core :as postal]
              robbit)
-  (:use scp-bot))
+  (:use scp askreddit))
 
 (defn sendmail [msg]
   (try
@@ -16,12 +16,9 @@
   (if-let [url (System/getenv "MONGOHQ_URL")]
     (mg/connect-via-uri! url)
     (do
-      (mg/connect!) (mg/set-db! (mg/get-db "local")))))
+      (mg/connect!)
+      (mg/set-db! (mg/get-db "local")))))
 
 (defn start []
-  (add-watch robbit/log-str :email  (fn [_ _ _ s]
-                                      (sendmail {:to   "mike.j.innes@gmail.com"
-                                                 :from "bots"
-                                                 :subject "bot logs"
-                                                 :body s})))
-  (robbit/start scp-bot))
+  (robbit/start scp-bot       :scp-bot)
+  (robbit/start askreddit-bot :askreddit))

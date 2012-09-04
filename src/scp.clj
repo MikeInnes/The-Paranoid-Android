@@ -1,9 +1,7 @@
-(ns scp-bot
+(ns scp
   "The thing that does the stuff."
   (:require [clojure.string :as str]
-             reddit
-             robbit)
-  (:gen-class :main true))
+             robbit users))
 
 (def marvin-quotes
  ["I think you ought to know I'm feeling very depressed."
@@ -50,6 +48,7 @@
   {:handler      (comp scp-reply :body)
    :user-agent   "/r/scp helper by /u/one_more_minute"
    :subreddits   "scp"
-   :login        (reddit/login "The-Paranoid-Android" "imsoodepressed")
+   :login        users/marvin
+   ; :debug        :true
    :log          (comp println str)
   })
