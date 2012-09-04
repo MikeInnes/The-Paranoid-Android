@@ -8,5 +8,6 @@
                 `(def ~sym (login ~user ~pass))) users))))
 
 (defusers
-  marvin    "The-Paranoid-Android" "imsoodepressed"
-  askreddit "Ask-Reddit-Bot"       "askmeanything")
+  one-more-minute "one_more_minute"      "ratatah2"
+  marvin          "The-Paranoid-Android" "imsoodepressed"
+  askreddit       "Ask-Reddit-Bot"       "askmeanything")

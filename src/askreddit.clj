@@ -10,7 +10,7 @@
   "Brain the size of a planet, and I have to tell people off for not putting questions in their titles. Just do it, and maybe I can go solve global warming or something instead."])
 
 (defn handler [title]
-  (if-not (re-find #"(?i)(?:\?|which|how|who|where|why|what|please|help|can|is|need|advice|give)" title)
+  (if-not (re-find #"(?i)(?:\?|which|how|who|where|why|what|please|can|is)" title)
     {:reply (str "Just a friendly reminder to put a thoughtful question in your title, as per the rules in the sidebar.\n\n"
                  "This is an experimental bot, so it might get things wrong - sorry if it did, but next time "
                  "please try and get a question mark in. PM this account with feedback.")
