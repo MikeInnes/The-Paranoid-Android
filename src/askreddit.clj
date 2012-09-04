@@ -10,8 +10,10 @@
   "Brain the size of a planet, and I have to tell people off for not putting questions in their titles. Just do it, and maybe I can go solve global warming or something instead."])
 
 (defn handler [title]
-  (if-not (re-find #"(?i)(?:\?|which|how|who|where|why|what|please|help|can|need|advice|is)" title)
-    {:reply (rand-nth responses)
+  (if-not (re-find #"(?i)(?:\?|which|how|who|where|why|what|please|help|can|is|need|advice)" title)
+    {:reply (str "Just a friendly reminder to put a question in your title, as per the rules in the sidebar.\n\n"
+                 "This is an experimental bot, so it might get things wrong - sorry if it did, but next time "
+                 "please try and get a question mark in. PM this account with feedback."
      :vote  :down}))
 
 (def askreddit-bot
@@ -19,7 +21,7 @@
    :user-agent   "/r/askreddit - tell off non-question submitters, by /u/one_more_minute"
    :subreddits   "askreddit"
    :type         :link
-   :login        users/marvin
+   :login        users/askreddit
    :log          (comp println str)
    ; :debug        true
   })
