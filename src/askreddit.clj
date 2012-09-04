@@ -20,6 +20,6 @@
    :subreddits   "askreddit"
    :type         :link
    :login        users/marvin
-   ; :log          (comp println str)
-   :debug        true
+   :log          (comp println str)
+   ; :debug        true
   })

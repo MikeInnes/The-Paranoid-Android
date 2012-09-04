@@ -49,6 +49,6 @@
    :user-agent   "/r/scp helper by /u/one_more_minute"
    :subreddits   "scp"
    :login        users/marvin
-   ; :debug        :true
    :log          (comp println str)
+   ; :debug        :true
   })
