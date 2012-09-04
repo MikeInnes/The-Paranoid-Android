@@ -1,8 +1,12 @@
 (ns users
   (:use reddit))
 
-(def marvin
-  (reddit/login "The-Paranoid-Android" "imsoodepressed"))
+(defmacro defusers [& users]
+  (let [users (partition 3 users)]
+    `(do
+       ~@(map (fn [[sym user pass]]
+                `(def ~sym (login ~user ~pass))) users))))
 
-(def askreddit
-  (reddit/login "Ask-Reddit-Bot" "askmeanything"))
+(defusers
+  marvin    "The-Paranoid-Android" "imsoodepressed"
+  askreddit "Ask-Reddit-Bot"       "askmeanything")
