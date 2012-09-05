@@ -20,5 +20,4 @@
       (mg/set-db! (mg/get-db "local")))))
 
 (defn start []
-  (robbit/start scp-bot       :scp-bot)
-  (robbit/start askreddit-bot :askreddit))
+  (robbit/start scp-bot       :scp-bot))
