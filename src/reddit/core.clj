@@ -18,9 +18,9 @@
 ;; Comments and links also get :time, with a DateTime object.
 
 (defmulti parse #(cond
-                  (vector? %) :vec
-                  (string? %) :str
-                  :else       (:kind %)))
+                   (vector? %) :vec
+                   (string? %) :str
+                   :else       (:kind %)))
 (defmethod parse :vec [items]
   (map parse items))
 (defmethod parse :str [s] s)
@@ -28,6 +28,7 @@
 ;; If a form is not recognised, it is printed and becomes nil.
 (defmethod parse :default [thing]
   (clojure.pprint/pprint thing)
+  ; (println (:kind thing))
   nil)
 
 ;; Listing objects are converted into lists.
@@ -41,7 +42,8 @@
               :permalink (comment-permalink comment)
               :time      (secs->date (comment :created_utc))
               :replies   (if replies
-                           (parse replies))})))
+                           (parse replies))
+              :score     (- (:ups comment) (:downs comment))})))
 
 ;; Accounts
 (defmethod parse "t2" [{account :data}]
@@ -52,9 +54,16 @@
 ;; Links
 (defmethod parse "t3" [{link :data}]
   (-> link
+      (dissoc :selftext)
       (merge {:kind      :link
               :permalink (str "http://www.reddit.com" (link :permalink))
-              :time      (secs->date (link :created_utc))})))
+              :time      (secs->date (link :created_utc))
+              :body      (:selftext link)})))
+
+;; "more" objects
+(defmethod parse "more" [{more :data}]
+  (-> more
+      (merge {:kind :more})))
 
 ;; --------------
 ;; Basic requests

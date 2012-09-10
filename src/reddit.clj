@@ -87,15 +87,17 @@
   page, and will fail if used too often due to
   a 304 error."
   [thing]
-  (let [comments (-> (thing :permalink) get-parsed second)]
+  (let [data     (-> thing :permalink get-parsed)
+        link     (ffirst data)
+        comments (second data)]
     (cond
       (comment? thing) (first comments)
-      (link?    thing) (assoc thing :replies comments)
+      (link?    thing) (-> thing (merge link) (assoc :replies comments))
       :else            thing)))
 
 (defn reply-by?
-  "Check if a link/comment has been replied to by a given account.
-  Not reliable, see `with-replies`."
+  "Check if a link/comment has been directly replied to by a given
+  account. Not reliable, see `with-replies`."
   [thing account]
   (some #(= (% :author) account) ((with-replies thing) :replies)))
 

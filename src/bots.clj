@@ -20,4 +20,4 @@
       (mg/set-db! (mg/get-db "local")))))
 
 (defn start []
-  (robbit/start scp-bot       :scp-bot))
+  (robbit/start scp-bot :scp-bot))

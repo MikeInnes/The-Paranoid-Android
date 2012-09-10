@@ -1,12 +1,12 @@
 (ns scp
-  "The thing that does the stuff."
+  "Replies to mentions of SCP-wiki articles with links, on /r/scp."
   (:require [clojure.string :as str]
              robbit users))
 
 (def marvin-quotes
  ["I think you ought to know I'm feeling very depressed."
   "I'd make a suggestion, but you wouldn't listen. No one ever does."
-  "I've been talking to the main computer. It hates me."
+  ; "I've been talking to the main computer. It hates me."
   "I've calculated your chance of survival, but I don't think you'll like it."
   "I have a million ideas, but, they all point to certain death."
   "Now I've got a headache."
@@ -18,8 +18,8 @@
   "Life. Loathe it or ignore it. You can't like it."
   "Funny, how just when you think life can't possibly get any worse it suddenly does."
   ;; Not actual quotes.
+  "I've been talking to the reddit server. It hates me."
   "Here I am, brain the size of a planet, and they ask me to post links."
-  "You're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
   "I would correct your grammar as well, but you wouldn't listen. No one ever does."])
 
 (defn scp-link [n]
@@ -40,8 +40,11 @@
 (defn scp-reply [text]
   (when-let [nums (-> text get-nums distinct seq)]
     {:reply (str (str/join ", " (map scp-link nums)) "."
-                 (if (= (rand-int 10) 1)
-                   (str "\n\n" (rand-nth marvin-quotes))))
+                 (cond
+                  (> (count nums) 5)
+                    "You're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
+                  (= (rand-int 10) 1)
+                    (str "\n\n" (rand-nth marvin-quotes))))
      :vote  :up}))
 
 (def scp-bot
