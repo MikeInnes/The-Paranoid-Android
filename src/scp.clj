@@ -42,7 +42,8 @@
     {:reply (str (str/join ", " (map scp-link nums)) "."
                  (cond
                   (> (count nums) 5)
-                    "You're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
+                    (str "\n\n" "You're not even going to click on all of those, are you? "
+                                "Brain the size of a planet, and this is what they've got me doing...")
                   (= (rand-int 10) 1)
                     (str "\n\n" (rand-nth marvin-quotes))))
      :vote  :up}))
