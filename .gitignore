@@ -10,3 +10,4 @@ pom.xml
 .lein-plugins
 *.sublime-workspace
 /data
+log*
