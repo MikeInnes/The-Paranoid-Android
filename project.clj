@@ -3,10 +3,10 @@
   :url ""
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :source-paths ["src" "robbit"]
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [com.novemberain/monger "1.2.0"]
-                 ; [robbit "1.0.0-SNAPSHOT"]
-                 [com.draines/postal "1.8.0"]
+                 [enlive              "1.0.1"]
                  ; Robbit deps
                  [clj-http            "0.5.2"]
                  [cheshire            "4.0.1"]
