@@ -48,3 +48,8 @@
         (let [result (apply f args)]
           (swap! mem assoc args [result (system-ms)])
           result)))))
+
+(defn apply-opts [f & args]
+  (let [opts (last    args)
+        args (butlast args)]
+    (apply f args (reduce concat opts))))

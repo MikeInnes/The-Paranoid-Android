@@ -17,8 +17,8 @@
   "Turns 't3_xvzdh' into 'xvzdh'. * CHANGE THIS"
   [s] (second (re-find #"_(.+)" s)))
 
-(defn comment-permalink [comment]
-  (str "http://www.reddit.com/r/" (comment :subreddit) "/comments/" (-> comment :link_id trim-id) "/_/" (comment :id)))
+(defn comment-permalink [{:keys [subreddit link_id id] :as comment}]
+  (str "http://www.reddit.com/r/" subreddit "/comments/" (trim-id link_id) "/_/" id))
 
 ;; All reddit objects have a :kind of :link, :comment, or :account, along with relevant data.
 ;; Comments and links also get :time, with a DateTime object.
@@ -78,16 +78,34 @@
 
 (def ^:dynamic *user-agent* "reddit.clj")
 
+(defn request
+  "Request of type :get or :post."
+  [type url & {:keys [params login user-agent]}]
+  (let [f (type {:get  http/get
+                 :post http/post})]
+    (f url {:headers       {"User-Agent" (or user-agent *user-agent*)}
+            :cookies       (:cookies login)
+            :query-params  (merge {:uh (:modhash login)} params)})))
+
 (defn get-json
   "Retrieve and decode json from a web page. Takes a url and optional login and params.
   .json extension added automatically."
-  ([url & {:keys [params login]}]
-   (-> url
-       (str ".json")
-       (http/get {:headers      {"User-Agent" *user-agent*}
-                  :cookies      (:cookies login)
-                  :query-params params})
+  ([url & opts]
+   (-> (apply request :get (str url ".json") opts)
        :body (json/decode true))))
+
+(defn get-parsed
+  "Same as get-json + parsing."
+  [& args] (parse (apply get-json args)))
+
+(defn post
+  "Post with user-agent and login. Returns full clj-http response."
+  [url & opts]
+  (apply request :post url opts))
+
+;; -------
+;; Caching
+;; -------
 
 (def get-json' get-json)
 
@@ -98,26 +116,12 @@
   page will be cached for 2 minutes. Useful
   for testing, since multiple requests of
   the same page will cause reddit to 304."
-  []
-  (when-not caching
-    (def caching true)
-    (def get-json (memoize' get-json (* 2 60 1000)))))
+  [] (when-not caching
+       (def caching true)
+       (def get-json (memoize' get-json (* 2 60 1000)))))
 
 (defn disable-caching
   "Disable caching of requests."
-  []
-  (when caching
-    (def caching false)
-    (def get-json get-json')))
-
-(defn get-parsed
-  "Same as get-json + parsing."
-  [& args] (parse (apply get-json args)))
-
-(defn post
-  "Post with user-agent and login. Returns full clj-http response."
-  [url & {:keys [params login]}]
-  (http/post url {:headers       {"User-Agent" *user-agent*}
-                  :cookies       (:cookies login)
-                  :query-params  (merge {:uh (:modhash login)}
-                                        params)}))
+  [] (when caching
+       (def caching false)
+       (def get-json get-json')))

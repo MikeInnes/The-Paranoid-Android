@@ -36,7 +36,7 @@
                        :cookies (response :cookies)
                        :modhash (data :modhash)}
       ; Unsuccessful
-      (seq errors)    errors
+      (seq errors)    response-json
       :else           {:errors  :unknown
                        :reponse response
                        :data    response-json})))
@@ -69,7 +69,7 @@
         (if-not (empty? s)
           (concat s (items url (last s))))))))
 
-; Get rid of clj-time
+; TODO: Get rid of clj-time
 (defn items-since
   "Takes `items` posted after the specified DateTime object."
   [date url] (take-while #(after? (% :time) date) (items url)))
@@ -128,7 +128,7 @@
   "Vote :up, :down, or :none on a link/comment."
   [item direction login]
   (post (reddit api vote)
-        :login login
+        :login  login
         :params {:id  (item :name)
                  :dir (direction
                         {:up 1, :none 0, :down -1})}))
@@ -139,5 +139,6 @@
 
 (defn me
   "Data about the currently logged in user."
-  [login] (parse (get-json (reddit api me)
-                           :login login)))
+  [login] (get-parsed (reddit api me)
+                      :login login))
+
