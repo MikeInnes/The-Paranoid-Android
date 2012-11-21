@@ -113,7 +113,12 @@
 
 (defn start
   ([bot] (start bot (-> bot :login :name)))
-  ([bot key] (let [bot (init-bot bot key)]
-               (if (@bots key) (stop key))
-               (future (run-bot bot))
-               (swap! bots assoc key bot))))
+  ([bot key]
+    (if (login-success? (bot :login))
+      ; Start the bot
+      (let [bot (init-bot bot key)]
+        (if (@bots key) (stop key))
+        (future (run-bot bot))
+        (swap! bots assoc key bot))
+      ; Or don't
+      (println "Login for" key "invalid:" (str "\n" (bot :login))))))

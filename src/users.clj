@@ -20,5 +20,4 @@
 
 (defusers
   marvin      "The-Paranoid-Android" "imsoodepressed"
-  askreddit   "Ask-Reddit-Bot"       "askmeanything"
   top-comment "Top-Comment-Bot"      "insertwittyresponse")
