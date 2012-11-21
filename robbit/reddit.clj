@@ -28,17 +28,18 @@
   [user pass]
   (let [response (post (reddit api login)
                        :params {"user" user, "passwd" pass, "api_type" "json"})
-        data     (-> response :body (json/decode true) :json)]
+        {:keys [errors data] :as response-json}
+                 (-> response :body (json/decode true) :json)]
     (cond
       ; Successful
       (data :modhash) {:name    user
                        :cookies (response :cookies)
                        :modhash (data :modhash)}
       ; Unsuccessful
-      (data :errors)  data
+      (seq errors)    errors
       :else           {:errors  :unknown
                        :reponse response
-                       :data    data})))
+                       :data    response-json})))
 
 (defn login-success?
   "If the login was successful, returns it.
