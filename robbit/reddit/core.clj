@@ -1,4 +1,10 @@
 (ns reddit.core
+  "1. Functionality for parsing reddit's json
+  into usable clojure objects.
+  2. Low-level interface to reddit i.e. basic
+  retreival of json / reddit objects from pages,
+  and posting of requests. Specific API calls
+  are built on top of these."
   (:use      util.time util.spacers)
   (:require [clj-http.client :as http]
             [cheshire.core   :as json]))
@@ -19,14 +25,15 @@
 
 (defmulti parse #(cond
                    (vector? %) :vec
-                   (string? %) :str
+                   (string? %) :atom
                    :else       (:kind %)))
 (defmethod parse :vec [items]
   (map parse items))
-(defmethod parse :str [s] s)
+(defmethod parse :atom [a] a)
 
 ;; If a form is not recognised, it is printed and becomes nil.
 (defmethod parse :default [thing]
+  (println "Error parsing form:")
   (clojure.pprint/pprint thing)
   ; (println (:kind thing))
   nil)
@@ -36,14 +43,14 @@
   (parse (listing :children)))
 
 ;; Comments
-(defmethod parse "t1" [{{:keys [replies] :as comment} :data}]
+(defmethod parse "t1" [{{:keys [replies ups downs] :as comment} :data}]
   (-> comment
       (merge {:kind      :comment
               :permalink (comment-permalink comment)
               :time      (secs->date (comment :created_utc))
               :replies   (if replies
                            (parse replies))
-              :score     (- (:ups comment) (:downs comment))})))
+              :score     (- ups downs)})))
 
 ;; Accounts
 (defmethod parse "t2" [{account :data}]
@@ -65,9 +72,9 @@
   (-> more
       (merge {:kind :more})))
 
-;; --------------
-;; Basic requests
-;; --------------
+;; ------------------
+;; Low-level requests
+;; ------------------
 
 (def ^:dynamic *user-agent* "reddit.clj")
 
@@ -87,21 +94,21 @@
 (def ^:private caching false)
 
 (defn enable-caching
-  "If called, will enable caching of calls to
-  reddit. Each call will be cached for 2 minutes.
-  Enabled by default, call (disable-caching) to
-  turn off."
+  "Enable caching of `get` requests. Each
+  page will be cached for 2 minutes. Useful
+  for testing, since multiple requests of
+  the same page will cause reddit to 304."
   []
   (when-not caching
     (def caching true)
     (def get-json (memoize' get-json (* 2 60 1000)))))
 
-(defn disable-caching []
+(defn disable-caching
+  "Disable caching of requests."
+  []
   (when caching
     (def caching false)
     (def get-json get-json')))
-
-(enable-caching)
 
 (defn get-parsed
   "Same as get-json + parsing."
@@ -114,11 +121,3 @@
                   :cookies       (:cookies login)
                   :query-params  (merge {:uh (:modhash login)}
                                         params)}))
-
-(defn items-after
-  "Loads 1 page of the links/comments after the given one."
-  [item url limit]
-  (get-parsed url
-              :params {:limit limit
-                       :after (:name item)
-                       :sort  "new"}))

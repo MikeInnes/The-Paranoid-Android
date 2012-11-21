@@ -14,7 +14,7 @@
   [html]
   (select html [:tr.result :td.info]))
 
-(defn link
+(defn permalink
   "Extract the link from a result."
   [result]
   (-> (select result [:div.title :a]) first :attrs :href))
@@ -31,4 +31,4 @@
        (clojure.string/replace reddit-url "http://" "")))
 
 (defn repost-urls [reddit-url]
-  (->> reddit-url karmadecay-url get-html results (filter valid?) (map link)))
+  (->> reddit-url karmadecay-url get-html results (filter valid?) (map permalink)))

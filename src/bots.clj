@@ -11,9 +11,9 @@
       (mg/set-db! (mg/get-db "local")))))
 
 (defn start []
-  (println "Starting...")
   (robbit/start scp-bot      :scp-bot)
-  (robbit/start karma-police :karma-police))
+  (robbit/start karma-police :karma-police)
+  nil)
 
 (defn stop []
   (robbit/stop :scp-bot)

@@ -1,12 +1,96 @@
-:karma-police running: 2012-11-19 07:18:41
+:karma-police running: 2012-11-21 05:32:42
 ----------------------------------------------------
-:scp-bot running: 2012-11-19 07:18:41
+:scp-bot running: 2012-11-21 05:32:42
 ----------------------------------------------------
-:karma-police running: 2012-11-19 07:13:41
+java.io.FileNotFoundException: log.txt (The process cannot access the file because it is being used by another process)
 ----------------------------------------------------
-:scp-bot running: 2012-11-19 07:13:41
+http://www.reddit.com/r/funny/comments/13jl96/i_study_there_at_least_once_a_week/
+I study there at least once a week
+
+Reply by Top-Comment-Bot:
+This could also be someone who competes with this company and wants to slander them hence ruining their image.
+
+From the comments so far, it appears to have worked.
+
+(I could be wrong though :p)
+
+*~ [DiscoMad](http://www.reddit.com/r/geek/comments/kxhrt/_/c2o1hnb)*
+
+------------
+
+**^This ^image ^has ^been ^submitted [^9 ^times](http://www.karmadecay.com/www.reddit.com/r/funny/comments/13jl96/i_study_there_at_least_once_a_week/) ^before. ^Above ^is ^the ^previous ^top ^comment.**
+:debug
 ----------------------------------------------------
-:karma-police running: 2012-11-19 07:08:41
+http://www.reddit.com/r/funny/comments/13jmz8/we_call_this_the_act_of_nope/
+We Call This the Act of NOPE
+
+Reply by Top-Comment-Bot:
+repost? repost.
+
+*~ [homorob0tic](http://www.reddit.com/r/WTF/comments/tx1sm/_/c4qfpwl)*
+
+------------
+
+**^This ^image ^has ^been ^submitted [^once](http://www.karmadecay.com/www.reddit.com/r/funny/comments/13jmz8/we_call_this_the_act_of_nope/) ^before. ^Above ^is ^the ^previous ^top ^comment.**
+:debug
 ----------------------------------------------------
-:scp-bot running: 2012-11-19 07:08:41
+http://www.reddit.com/r/funny/comments/13jnfj/how_i_watch_porn/
+How I watch porn
+
+Reply by Top-Comment-Bot:
+I like the hole near the mouth. I imagine it's for cheetos
+
+*~ [ntrpik](http://www.reddit.com/r/WTF/comments/xnif8/_/c5o0tb7)*
+
+------------
+
+**^This ^image ^has ^been ^submitted [^thrice](http://www.karmadecay.com/www.reddit.com/r/funny/comments/13jnfj/how_i_watch_porn/) ^before. ^Above ^is ^the ^previous ^top ^comment.**
+:debug
+----------------------------------------------------
+:scp-bot running: 2012-11-21 05:27:42
+----------------------------------------------------
+:karma-police running: 2012-11-21 05:27:42
+----------------------------------------------------
+http://www.reddit.com/r/funny/comments/13jpno/college/
+College
+
+Reply by Top-Comment-Bot:
+All right, now get me a garden hose, an avocado, and an ice pick.
+
+*~ [Darkblitz9](http://www.reddit.com/r/pics/comments/11xdwn/_/c6qhnqa)*
+
+------------
+
+**^This ^image ^has ^been ^submitted [^5 ^times](http://www.karmadecay.com/www.reddit.com/r/funny/comments/13jpno/college/) ^before. ^Above ^is ^the ^previous ^top ^comment.**
+:debug
+----------------------------------------------------
+http://www.reddit.com/r/funny/comments/13jprw/reddit_was_mentioned_on_tosh0/
+Reddit was mentioned on Tosh.0!!
+
+Reply by Top-Comment-Bot:
+Gggg Gggggg Gggg. Ggggggg Gggggg! G Gggg gggg ggggggg gggggg
+
+*~ [urhedsonfire](http://www.reddit.com/r/ggggg/comments/13jpoe/_/c74kos3)*
+
+------------
+
+**^This ^image ^has ^been ^submitted [^once](http://www.karmadecay.com/www.reddit.com/r/funny/comments/13jprw/reddit_was_mentioned_on_tosh0/) ^before. ^Above ^is ^the ^previous ^top ^comment.**
+:debug
+----------------------------------------------------
+http://www.reddit.com/r/funny/comments/13jq36/wellthis_is_awkward_nowpic/
+Well...this is awkward now...[pic]
+
+Reply by Top-Comment-Bot:
+The headline is the same as the name of the subreddit?  Either you're lazy, or you're meta.
+
+*~ [LordBling](http://www.reddit.com/r/toosoon/comments/13jflt/_/c74hzxi)*
+
+------------
+
+**^This ^image ^has ^been ^submitted [^once](http://www.karmadecay.com/www.reddit.com/r/funny/comments/13jq36/wellthis_is_awkward_nowpic/) ^before. ^Above ^is ^the ^previous ^top ^comment.**
+:debug
+----------------------------------------------------
+:scp-bot running: 2012-11-21 05:22:42
+----------------------------------------------------
+:karma-police running: 2012-11-21 05:22:42
 ----------------------------------------------------

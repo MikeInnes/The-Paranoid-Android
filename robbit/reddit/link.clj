@@ -1,11 +1,5 @@
 (ns reddit.link
-  (:use reddit.core))
-
-(defn from-url [url]
-  (let [data     (get-parsed url)
-        link     (ffirst data)
-        comments (second data)]
-    (assoc link :replies comments)))
-
-(defn top-comment [link]
-	(-> link :replies first))
+  "Functions for interacting with link objects.
+  Functions that apply to both links and comments
+  (e.g. `reply`) are also contained here."
+  (:use reddit reddit.core reddit.url))

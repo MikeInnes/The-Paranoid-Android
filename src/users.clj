@@ -1,5 +1,5 @@
 (ns users
-  (:use reddit))
+  (:require reddit))
 
 (defmacro defusers
   "Define multiple logins at once.
@@ -15,10 +15,10 @@
   (let [users (partition 3 users)]
     `(do
        ~@(map (fn [[sym user pass]]
-                `(def ~sym (login ~user ~pass)))
+                `(def ~sym (reddit/login ~user ~pass)))
               users))))
 
 (defusers
-  marvin          "The-Paranoid-Android" "imsoodepressed"
-  askreddit       "Ask-Reddit-Bot"       "askmeanything"
-  top-comment     "Top-Comment-Bot"      "insertwittyresponse")
+  marvin      "The-Paranoid-Android" "imsoodepressed"
+  askreddit   "Ask-Reddit-Bot"       "askmeanything"
+  top-comment "Top-Comment-Bot"      "insertwittyresponse")

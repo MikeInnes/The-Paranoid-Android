@@ -1,5 +1,6 @@
 (ns robbit
-  (:use reddit util.time util.spacers))
+  (:use reddit util.time util.spacers)
+  (:require [reddit.url :as url]))
 
 ;; ------------------
 ;; Logging functions.
@@ -74,8 +75,8 @@
 
 (defn bot-items [bot]
   (->> (bot :subreddits)
-       ((if (= (bot :type) :link) subreddit-links
-                                  subreddit-comments))
+       ((if (= (bot :type) :link) url/subreddit-new
+                                  url/subreddit-comments))
        (items-since @(bot :last-run))
        (filter #(not (author? % bot)))))
 
