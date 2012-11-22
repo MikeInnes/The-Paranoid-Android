@@ -78,14 +78,23 @@
 
 (def ^:dynamic *user-agent* "reddit.clj")
 
+; (defn request
+;   "Request of type :get or :post."
+;   [type url & {:keys [params login user-agent]}]
+;   (let [request (type {:get  http/get
+;                        :post http/post})]
+;     (request url {:headers       {"User-Agent" (or user-agent *user-agent*)}
+;                   :cookies       (:cookies login)
+;                   :query-params  (merge {:uh (:modhash login)} params)})))
+
 (defn request
   "Request of type :get or :post."
-  [type url & {:keys [params login user-agent]}]
-  (let [f (type {:get  http/get
-                 :post http/post})]
-    (f url {:headers       {"User-Agent" (or user-agent *user-agent*)}
-            :cookies       (:cookies login)
-            :query-params  (merge {:uh (:modhash login)} params)})))
+  [method url & {:keys [params login user-agent]}]
+  (http/request {:method        method
+                 :url           url
+                 :headers       {"User-Agent" (or user-agent *user-agent*)}
+                 :cookies       (:cookies login)
+                 :query-params  (merge {:uh (:modhash login)} params)}))
 
 (defn get-json
   "Retrieve and decode json from a web page. Takes a url and optional login and params.

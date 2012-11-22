@@ -102,6 +102,9 @@
 
 (def comments-from-url (comp :replies link-from-url))
 
+;; Fix context bug
+(def comment-from-url (comp first-reply link-from-url))
+
 (defn with-replies
   "Reload the comment/link (e.g. from `items`)
   with :replies data. Only loads one page."

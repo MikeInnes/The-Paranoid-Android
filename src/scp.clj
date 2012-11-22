@@ -1,7 +1,9 @@
 (ns scp
   "Replies to mentions of SCP-wiki articles with links, on /r/scp."
-  (:require [clojure.string :as str]
-             robbit users))
+  (:use reddit.format)
+  (:require  users
+            [clojure.string  :as str]
+            [clj-http.client :as http]))
 
 (def marvin-quotes
  ["I think you ought to know I'm feeling very depressed."
@@ -22,30 +24,39 @@
   "Here I am, brain the size of a planet, and they ask me to post links. Call that job satisfaction, 'cause I don't. "
   "I would correct your grammar as well, but you wouldn't listen. No one ever does."])
 
+(defn scp-url [n]
+  (str "http://scp-wiki.wikidot.com/scp-" n))
+
 (defn scp-link [n]
-  (str "[SCP-" n "](http://scp-wiki.wikidot.com/scp-" n ")"))
+  (hyperlink (str "SCP-" n) (scp-url n)))
+
+(defn exists? [n]
+  (-> n scp-url (http/get {:throw-exceptions false}) :status (not= 404)))
 
 (defn get-nums
-  "Detects numbers 000-1999, including extensions, and ignores those inside a [link]()."
-  [s] (re-seq #"(?i)(?x)               # Ignore case, comment mode
-                (?<! /scp-         )   # Not a url.
-                (?<! \d )              # Not preceded by a digit
-                1? \d{3}               # 000 - 1999
-                (?: -EX|-ARC|-J|-D )?  # Optional extensions
-                (?! \d | \.\d      )   # Not followed by another digit or decimal point
-                (?! [^\[]*\]\(     )   # or '](' (link)
-                (?! -              )   # or a dash"
+  "Detects numbers 000-1999, including extensions."
+  [s] (re-seq #"(?i)(?x)                  # Ignore case, comment mode
+                (?<! \d               )   # Not preceded by a digit
+                1? \d{3}                  # 000 - 1999
+                (?: -EX|-ARC|-J|-D    )?  # Optional extensions
+                (?= \ |\.|,|;|:|\n|\Z )   # Followed by punctuation (i.e. not a url)
+                (?! \.\d              )   # Not followed by a decimal point"
               s))
 
+(defn probably
+  "True with probability n."
+  [n] (< (rand) n))
+
 (defn scp-reply [text]
-  (when-let [nums (-> text get-nums distinct seq)]
-    {:reply (str (str/join ", " (map scp-link nums)) "."
-                 (cond
+  (when-let [nums (->> text get-nums distinct (filter exists?) seq)]
+    {:reply (paragraphs
+              (str (str/join ", " (map scp-link nums)) ".")
+                (cond
                   (> (count nums) 5)
-                    (str "\n\n" "You're not even going to click on all of those, are you? "
-                                "Brain the size of a planet, and this is what they've got me doing...")
-                  (= (rand-int 10) 1)
-                    (str "\n\n" (rand-nth marvin-quotes))))
+                    (str "You're not even going to click on all of those, are you? "
+                         "Brain the size of a planet, and this is what they've got me doing...")
+                  (probably 1/10)
+                    (rand-nth marvin-quotes)))
      :vote  :up}))
 
 (def scp-bot

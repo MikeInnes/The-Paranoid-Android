@@ -105,7 +105,7 @@
       (spaced spacer
         (when-not @(bot :cancelled)
           (try (run-once bot)
-            (catch Exception e ((bot :log) e)))
+            (catch Exception e ((bot :log) (str "Error running " (bot :key) "\n" e))))
           (recur))))))
 
 (defn stop [key]

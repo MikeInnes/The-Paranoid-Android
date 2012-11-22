@@ -1,5 +1,5 @@
 (ns karma-police
-  (:use karma-police.karmadecay reddit reddit.comment)
+  (:use karma-police.karmadecay reddit reddit.format)
   (:require users))
 
 (declare karma-police)
@@ -40,20 +40,21 @@
 
 (defn link-reply [url]
   (when-let [reposts (-> url reposts seq)]
-    (when-let [comment (top-comment-formatted reposts)]
-      {:reply (str comment "\n\n"
-                   "------------"                  "\n\n"
-                   (italic
-                     (superscript
-                       "This image has been submitted "
-                       (hyperlink (count-string (count reposts)) (karmadecay-url url))
-                       " before. Above is the previous top comment.")))
+    (when-let [top-comment (top-comment-formatted reposts)]
+      {:reply (paragraphs
+                top-comment
+                line
+                (italic
+                  (superscript
+                    "This image has been submitted "
+                    (hyperlink (count-string (count reposts)) (karmadecay-url url))
+                    " before. Above is the previous top comment.")))
       :vote :up})))
 
 (def karma-police
   {:handler      (comp link-reply :permalink)
    :user-agent   "Top Comment Bot by /u/one_more_minute"
-   :subreddits   "funny"
+   :subreddits   ["funny" "wtf" "pics"]
    :type         :link
    :login        users/top-comment
    :log          (comp println str)
