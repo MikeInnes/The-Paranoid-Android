@@ -2,15 +2,22 @@
   (:use karma-police.karmadecay reddit reddit.comment)
   (:require users))
 
+(declare karma-police)
+
 ; (def test-url "http://www.reddit.com/r/WTF/comments/13euma/parenting_youre_doing_it_wrong/")
 
 (defn reposts [url]
   (map link-from-url (repost-urls url)))
 
-(defn top-comment [links]
+(defn top-comments [links]
   (->> links
        (map first-reply)
        (filter identity)
+       (remove deleted-comment?)
+       (remove #(author? % (-> karma-police :login :name)))))
+
+(defn top-comment [links]
+  (->> links top-comments
        (sort-by :score)
        last))
 

@@ -78,8 +78,21 @@
 ;; Links/comments
 ;; --------------
 
+;; # Inspection
+
 (defn comment? [thing] (= (:kind thing) :comment))
 (defn link?    [thing] (= (:kind thing) :link   ))
+
+(defn author? [thing user] (= (thing :author) user))
+
+(defn deleted-comment? [comment]
+  (and (author? comment   "[deleted]")
+       (= (comment :body) "[deleted]")))
+
+(defn first-reply [thing]
+  (-> thing :replies first))
+
+;; # Retrieval
 
 (defn link-from-url [url]
   (let [data     (get-parsed url)
@@ -87,8 +100,7 @@
         comments (second data)]
     (assoc link :replies comments)))
 
-(defn first-reply [thing]
-  (-> thing :replies first))
+(def comments-from-url (comp :replies link-from-url))
 
 (defn with-replies
   "Reload the comment/link (e.g. from `items`)
@@ -101,6 +113,8 @@
       (comment? thing) (-> thing (merge (first comments)))
       (link?    thing) (-> thing (merge link) (assoc :replies comments))
       :else            thing)))
+
+;; # Actions
 
 (defn reply
   "Parent should be a link/comment object, reply is a string.
@@ -117,12 +131,6 @@
       #".error.USER_REQUIRED"                :user-required
       #".error.DELETED_COMMENT.field-parent" :parent-deleted
       (response :body))))
-
-; (defn reply-by?
-;   "Check if a link/comment has been directly replied to by a given
-;   account. Not reliable, see `with-replies`."
-;   [thing account]
-;   (some #(= (% :author) account) ((with-replies thing) :replies)))
 
 (defn vote
   "Vote :up, :down, or :none on a link/comment."
@@ -141,4 +149,3 @@
   "Data about the currently logged in user."
   [login] (get-parsed (reddit api me)
                       :login login))
-

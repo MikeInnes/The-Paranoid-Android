@@ -2,7 +2,7 @@
   "1. Functionality for parsing reddit's json
   into usable clojure objects.
   2. Low-level interface to reddit i.e. basic
-  retreival of json / reddit objects from pages,
+  retrieval of json / reddit objects from pages,
   and posting of requests. Specific API calls
   are built on top of these."
   (:use      util.time util.spacers)
@@ -26,6 +26,7 @@
 (defmulti parse #(cond
                    (vector? %) :vec
                    (string? %) :atom
+                   (nil?    %) :atom
                    :else       (:kind %)))
 (defmethod parse :vec [items]
   (map parse items))
@@ -48,8 +49,7 @@
       (merge {:kind      :comment
               :permalink (comment-permalink comment)
               :time      (secs->date (comment :created_utc))
-              :replies   (if replies
-                           (parse replies))
+              :replies   (parse replies)
               :score     (- ups downs)})))
 
 ;; Accounts
