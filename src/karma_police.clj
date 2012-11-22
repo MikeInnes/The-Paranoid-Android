@@ -47,7 +47,8 @@
                      (superscript
                        "This image has been submitted "
                        (hyperlink (count-string (count reposts)) (karmadecay-url url))
-                       " before. Above is the previous top comment.")))})))
+                       " before. Above is the previous top comment.")))
+      :vote :up})))
 
 (def karma-police
   {:handler      (comp link-reply :permalink)

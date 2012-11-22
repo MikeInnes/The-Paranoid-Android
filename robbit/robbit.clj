@@ -1,5 +1,6 @@
 (ns robbit
-  (:use reddit util.time util.spacers)
+  (:use     [reddit :exclude (author?)]
+             util.time util.spacers)
   (:require [reddit.url :as url]))
 
 ;; ------------------
