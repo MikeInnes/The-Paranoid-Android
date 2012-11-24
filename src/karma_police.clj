@@ -58,5 +58,6 @@
    :type         :link
    :login        users/top-comment
    :log          (comp println str)
+   :interval     2
    ; :debug        :true
   })

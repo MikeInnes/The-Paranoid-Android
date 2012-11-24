@@ -65,5 +65,6 @@
    :subreddits   "scp"
    :login        users/marvin
    :log          (comp println str)
+   :interval     2
    ; :debug        :true
   })
