@@ -3,6 +3,7 @@
   (:require users))
 
 (declare karma-police)
+(defn username [] (-> karma-police :login :name))
 
 ; (def test-url "http://www.reddit.com/r/WTF/comments/13euma/parenting_youre_doing_it_wrong/")
 
@@ -14,18 +15,26 @@
        (map first-reply)
        (filter identity)
        (remove deleted-comment?)
-       (remove #(author? % (-> karma-police :login :name)))))
+       #_(remove #(author? % (username))))) ; This bit isn't generic
+                                            ; Also, I'm currently ignoring it for comedic effect.
 
 (defn top-comment [links]
   (->> links top-comments
        (sort-by :score)
        last))
 
-(defn top-comment-formatted [links]
-  (if-let [{:keys [body author permalink]} (top-comment links)]
-    (str body "\n\n"
-         (italic
-           (str "~ " (hyperlink author permalink))))))
+;(defn top-comment-formatted [links]
+;  (if-let [{:keys [body author permalink]} (top-comment links)]
+;    (str body "\n\n"
+;         (italic
+;           (str "~ " (hyperlink author permalink))))))
+
+(defn format-comment [{:keys [body author permalink] :as comment}]
+  (paragraphs (if (= author (username))
+                (quotify body)
+                body)
+              (italic
+                (str "~ " (hyperlink author permalink)))))
 
 (defn count-string [n]
   (condp = n
@@ -34,21 +43,19 @@
     3 "thrice"
     (str n " times")))
 
-; (defn link-list [links]
-;   (clojure.string/join "\n"
-;     (map #(str "* " (hyperlink (:title %) (:permalink %))) links)))
-
 (defn link-reply [url]
   (when-let [reposts (-> url reposts seq)]
-    (when-let [top-comment (top-comment-formatted reposts)]
+    (when-let [top-comment (top-comment reposts)]
       {:reply (paragraphs
-                top-comment
+                (format-comment top-comment)
                 line
                 (italic
                   (superscript
                     "This image has been submitted "
                     (hyperlink (count-string (count reposts)) (karmadecay-url url))
-                    " before. Above is the previous top comment.")))
+                    " before. Above is the previous top comment."))
+                (if (author? top-comment (username))
+                  "Come on, people, this is just getting ridiculous."))
       :vote :up})))
 
 (def karma-police
