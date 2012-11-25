@@ -15,8 +15,8 @@
        (map first-reply)
        (filter identity)
        (remove deleted-comment?)
-       #_(remove #(author? % (username))))) ; This bit isn't generic
-                                            ; Also, I'm currently ignoring it for comedic effect.
+       ;(remove #(author? % (username))) ; This bit isn't generic
+       ))                                ; Also, I'm currently ignoring it for comedic effect.
 
 (defn top-comment [links]
   (->> links top-comments
@@ -55,7 +55,8 @@
                     (hyperlink (count-string (count reposts)) (karmadecay-url url))
                     " before. Above is the previous top comment."))
                 (if (author? top-comment (username))
-                  "Come on, people, this is just getting ridiculous."))
+                  "Come on, people, this is just getting ridiculous."
+                  (superscript-n 3 "As endorsed by " (hyperlink "Trapped_in_Reddit" "http://www.reddit.com/r/WTF/comments/13rrgr/sugar_and_sulfuric_acid_gif_xpost_from_rwoahdude/c76lwgj?context=3"))))
       :vote :up})))
 
 (def karma-police

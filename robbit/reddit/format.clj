@@ -12,6 +12,9 @@
   [& s]
   (str/replace (apply str s) #"([^ \[*]+)" "^$1"))
 
+(defn superscript-n [n & s]
+  (nth (iterate superscript (apply str s)) n))
+
 (defn hyperlink
   "Create markdown link."
   [s url]
