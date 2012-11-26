@@ -59,6 +59,8 @@
                        :after (:name item)
                        :sort  "new"}))
 
+;; This should be able to accept params.
+
 (defn items
   "Returns a lazy sequence of all items at the given
   url, including subsequent pages. API calls spaced."

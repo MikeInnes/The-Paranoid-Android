@@ -5,8 +5,6 @@
 (declare karma-police)
 (defn username [] (-> karma-police :login :name))
 
-; (def test-url "http://www.reddit.com/r/WTF/comments/13euma/parenting_youre_doing_it_wrong/")
-
 (defn reposts [url]
   (map link-from-url (repost-urls url)))
 
@@ -22,12 +20,6 @@
   (->> links top-comments
        (sort-by :score)
        last))
-
-;(defn top-comment-formatted [links]
-;  (if-let [{:keys [body author permalink]} (top-comment links)]
-;    (str body "\n\n"
-;         (italic
-;           (str "~ " (hyperlink author permalink))))))
 
 (defn format-comment [{:keys [body author permalink] :as comment}]
   (paragraphs (if (= author (username))
@@ -55,8 +47,7 @@
                     (hyperlink (count-string (count reposts)) (karmadecay-url url))
                     " before. Above is the previous top comment."))
                 (if (author? top-comment (username))
-                  "Come on, people, this is just getting ridiculous."
-                  (superscript-n 3 "As endorsed by " (hyperlink "Trapped_in_Reddit" "http://www.reddit.com/r/WTF/comments/13rrgr/sugar_and_sulfuric_acid_gif_xpost_from_rwoahdude/c76lwgj?context=3"))))
+                  "Come on, people, this is just getting ridiculous."))
       :vote :up})))
 
 (def karma-police
