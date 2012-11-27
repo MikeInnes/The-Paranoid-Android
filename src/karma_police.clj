@@ -21,7 +21,7 @@
        last))
 
 (defn bot-post? [comment]
-  (some #(author? comment %) "Trapped_in_Robot" "Top-Comment-Bot"))
+  (some #(author? comment %) ["Trapped_in_Robot" "Top-Comment-Bot"]))
 
 (defn format-comment [{:keys [body author permalink] :as comment}]
   (paragraphs (if (bot-post? comment)
