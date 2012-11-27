@@ -22,7 +22,7 @@
        last))
 
 (defn format-comment [{:keys [body author permalink] :as comment}]
-  (paragraphs (if (= author (username))
+  (paragraphs (if (author? comment (username))
                 (quotify body)
                 body)
               (italic
@@ -42,10 +42,10 @@
                 (format-comment top-comment)
                 line
                 (italic
-                  (superscript
+                  (superscript-n 2
                     "This image has been submitted "
                     (hyperlink (count-string (count reposts)) (karmadecay-url url))
-                    " before. Above is the previous top comment."))
+                    " before - above is the previous top comment."))
                 (if (author? top-comment (username))
                   "Come on, people, this is just getting ridiculous."))
       :vote :up})))
@@ -53,7 +53,7 @@
 (def karma-police
   {:handler      (comp link-reply :permalink)
    :user-agent   "Top Comment Bot by /u/one_more_minute"
-   :subreddits   ["funny" "wtf" "pics" "aww"]
+   :subreddits   ["funny" "wtf" "pics" "aww" "gifs"]
    :type         :link
    :login        users/top-comment
    :log          (comp println str)
