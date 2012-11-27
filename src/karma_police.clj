@@ -13,16 +13,18 @@
        (map first-reply)
        (filter identity)
        (remove deleted-comment?)
-       ;(remove #(author? % (username))) ; This bit isn't generic
-       ))                                ; Also, I'm currently ignoring it for comedic effect.
+       (remove #(author? % (username)))))
 
 (defn top-comment [links]
   (->> links top-comments
        (sort-by :score)
        last))
 
+(defn bot-post? [comment]
+  (some #(author? comment %) "Trapped_in_Robot" "Top-Comment-Bot"))
+
 (defn format-comment [{:keys [body author permalink] :as comment}]
-  (paragraphs (if (author? comment (username))
+  (paragraphs (if (bot-post? comment)
                 (quotify body)
                 body)
               (italic
@@ -46,7 +48,7 @@
                     "This image has been submitted "
                     (hyperlink (count-string (count reposts)) (karmadecay-url url))
                     " before - above is the previous top comment."))
-                (if (author? top-comment (username))
+                (if (bot-post? top-comment)
                   "Come on, people, this is just getting ridiculous."))
       :vote :up})))
 
@@ -55,7 +57,7 @@
    :user-agent   "Top Comment Bot by /u/one_more_minute"
    :subreddits   ["funny" "wtf" "pics" "aww" "gifs"]
    :type         :link
-   :login        users/top-comment
+   :login        users/trapped-in-robot
    :log          (comp println str)
    :interval     2
    ; :debug        :true
