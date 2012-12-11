@@ -5,7 +5,7 @@
   retrieval of json / reddit objects from pages,
   and posting of requests. Specific API calls
   are built on top of these."
-  (:use      util.time util.spacers)
+  (:use      util.spacers)
   (:require [clj-http.client :as http]
             [cheshire.core   :as json]))
 
@@ -13,11 +13,14 @@
 ;; Parsing
 ;; -------
 
-(defn trim-id
+(defn- secs->date [t]
+  (java.util.Date. (long (* t 1000))))
+
+(defn- trim-id
   "Turns 't3_xvzdh' into 'xvzdh'. * CHANGE THIS"
   [s] (second (re-find #"_(.+)" s)))
 
-(defn comment-permalink [{:keys [subreddit link_id id] :as comment}]
+(defn- comment-permalink [{:keys [subreddit link_id id] :as comment}]
   (str "http://www.reddit.com/r/" subreddit "/comments/" (trim-id link_id) "/_/" id))
 
 ;; All reddit objects have a :kind of :link, :comment, or :account, along with relevant data.
@@ -116,7 +119,7 @@
 ;; Caching
 ;; -------
 
-(def get-json' get-json)
+(def ^:private get-json' get-json)
 
 (def ^:private caching false)
 

@@ -1,7 +1,9 @@
 (ns robbit
   (:use     [reddit :exclude (author?)]
-             util.time util.spacers)
+             util.spacers)
   (:require [reddit.url :as url]))
+
+(defn now [] (java.util.Date.))
 
 ;; ------------------
 ;; Logging functions.
@@ -32,7 +34,7 @@
    :subreddits   "all"                            ; String or vector of strings. Load comments/links from here.
    :login        nil                              ; Use reddit/login to generate a login.
    :interval     5                                ; Minutes between successive runs.
-   :last-run     (now)                            ; Date in the format "yyyy-MM-dd HH:mm:ss".
+   :last-run     (now)                ; Date in the format "yyyy-MM-dd HH:mm:ss".
    :debug        false                            ; Responses will be logged but not actually performed.
    :log          log
    :cancelled    (atom false)})                   ; Internal: the bot's thread will check this.
@@ -48,7 +50,7 @@
   (= (thing :author) (-> bot :login :name)))
 
 (defn update-last-run [bot date]
-  (swap! (bot :last-run) #(if (after? date %) date %)))
+  (swap! (bot :last-run) #(if (.after date %) date %)))
 
 (defmulti handle-response
   "This is applied to each pair of the response map, dispatching

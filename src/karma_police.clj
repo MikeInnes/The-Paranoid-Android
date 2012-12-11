@@ -55,10 +55,10 @@
 (def karma-police
   {:handler      (comp link-reply :permalink)
    :user-agent   "Top Comment Bot by /u/one_more_minute"
-   :subreddits   ["funny" "wtf" "pics" "aww" "gifs"]
+   :subreddits   ["funny" "wtf" "pics" "gifs"]
    :type         :link
    :login        users/trapped-in-robot
-   :log          (comp println str)
+   ; :log          (comp println str)
    :interval     2
-   ; :debug        :true
+   :debug        :true
   })

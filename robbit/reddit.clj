@@ -1,5 +1,5 @@
 (ns reddit
-  (:use      reddit.core util.spacers util.time)
+  (:use      reddit.core util.spacers)
   (:require [clojure.string :as str ]
             [cheshire.core  :as json]
             [reddit.url :refer (reddit)]))
@@ -71,10 +71,9 @@
         (if-not (empty? s)
           (concat s (items url (last s))))))))
 
-; TODO: Get rid of clj-time
 (defn items-since
   "Takes `items` posted after the specified DateTime object."
-  [date url] (take-while #(after? (% :time) date) (items url)))
+  [date url] (take-while #(.after (% :time) date) (items url)))
 
 ;; --------------
 ;; Links/comments
