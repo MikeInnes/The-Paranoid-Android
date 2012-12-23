@@ -35,12 +35,12 @@
 
 (defn get-nums
   "Detects numbers 000-1999, including extensions."
-  [s] (re-seq #"(?i)(?x)                  # Ignore case, comment mode
-                (?<! \d               )   # Not preceded by a digit
-                1? \d{3}                  # 000 - 1999
-                (?: -EX|-ARC|-J|-D    )?  # Optional extensions
-                (?= \ |\.|,|;|:|\n|\Z )   # Followed by punctuation (i.e. not a url)
-                (?! \.\d              )   # Not followed by a decimal point"
+  [s] (re-seq #"(?i)(?x)                     # Ignore case, comment mode
+                (?<! \d                  )   # Not preceded by a digit
+                1? \d{3}                     # 000 - 1999
+                (?: -EX|-ARC|-J|-D       )?  # Optional extensions
+                (?= \ |\.|,|;|:|\n|\Z|\? )   # Followed by punctuation (i.e. not a url)
+                (?! \.\d                 )   # Not followed by a decimal point"
               s))
 
 (defn probably
