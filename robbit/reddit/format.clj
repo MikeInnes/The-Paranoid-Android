@@ -7,13 +7,18 @@
   [& s]
   (clojure.string/replace (apply str s) #"(\A|\n\n)(.+)" "$1> $2"))
 
+; (defn superscript
+;   "^Superscript each word."
+;   [& s]
+;   (str/replace (apply str s) #"([^ \[*]+)" "^$1"))
+
 (defn superscript
   "^Superscript each word."
-  [& s]
-  (str/replace (apply str s) #"([^ \[*]+)" "^$1"))
+  [& s] (str "^(" (apply str s) ")"))
 
-(defn superscript-n [n & s]
-  (nth (iterate superscript (apply str s)) n))
+(defn superscript-n
+  "Apply superscript n times."
+  [n & s] (nth (iterate superscript (apply str s)) n))
 
 (defn hyperlink
   "Create markdown link."
@@ -30,4 +35,12 @@
   as a seperate paragraph."
   [& ss] (->> ss (filter identity) (str/join "\n\n")))
 
-(def line "------------------")
+(def line "---")
+
+(def --- line)
+(def i italic)
+(def ss superscript)
+(def sn superscript-n)
+(def l hyperlink)
+(def p paragraphs)
+(def q quotify)
