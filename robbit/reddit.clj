@@ -60,16 +60,17 @@
                        :after (:name item)
                        :sort  "new"}))
 
-;; TODO: This should be able to accept params.
-
 (defn items
   "Returns a lazy sequence of all items at the given
   url, including subsequent pages. API calls spaced."
-  [url & [after]]
+  [url & {:keys [params]}]
   (lazy-seq
-    (let [s (api-call (items-after after url 1000))]
+    (let [s (api-call;(items-after after url 1000)
+                      (get-parsed url :params (merge {:limit 1000
+                                                      :sort  "new"}
+                                                     params)))]
       (if-not (empty? s)
-        (concat s (items url (last s)))))))
+        (concat s (items url :params (assoc params :after (-> s last :name))))))))
 
 (defn items-since
   "Takes `items` posted after the specified DateTime object."
@@ -106,12 +107,14 @@
         comments (second data)]
     (assoc link :replies comments)))
 
-(def ^{:doc "Retreive comments from a url (a link page)."}
-  get-comments (comp :replies get-link))
+(def get-comments
+  "Retreive comments from a url (a link page)."
+  (comp :replies get-link))
 
-;; Fix context bug
-(def ^{:doc "Return a comment for the given permalink."}
-  get-comment (comp first :replies get-link))
+(def get-comment
+  "Return a comment for the given permalink.
+  Currently ignores context param."
+  (comp first :replies get-link))
 
 (defn with-replies
   "Reload the comment/link (e.g. from `items`)
@@ -168,12 +171,15 @@
   (get-parsed (str (reddit user) "/" username "/about")))
 
 (defn user-comments
-  "Lazy seq of all comments by a user."
-  [username]
-  (items (str (reddit user) "/" username)))
+  "Lazy seq of all comments by a user.
+  Can take params e.g.
+      (user-comments \"user\" :params {:sort \"top\"
+                                       :t    \"all\"})"
+  [username & opts]
+  (apply items (str (reddit user) "/" username) opts))
 
 (defn by-subreddit
-  "Filter comments by subreddit/list of subreddits."
+  "Filter comments by subreddit/set of subreddits."
   [comments subreddits]
   (let [subreddits (if (set? subreddits) subreddits #{subreddits})]
     (filter (comp subreddits :subreddit) comments)))
