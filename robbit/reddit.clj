@@ -1,4 +1,5 @@
 (ns reddit
+  "High level interface to reddit."
   (:use      reddit.core util.spacers)
   (:require [clojure.string :as str ]
             [cheshire.core  :as json]
@@ -59,17 +60,16 @@
                        :after (:name item)
                        :sort  "new"}))
 
-;; This should be able to accept params.
+;; TODO: This should be able to accept params.
 
 (defn items
   "Returns a lazy sequence of all items at the given
   url, including subsequent pages. API calls spaced."
-  ([url] (items url nil))
-  ([url after]
-    (lazy-seq
-      (let [s (api-call (items-after after url 1000))]
-        (if-not (empty? s)
-          (concat s (items url (last s))))))))
+  [url & [after]]
+  (lazy-seq
+    (let [s (api-call (items-after after url 1000))]
+      (if-not (empty? s)
+        (concat s (items url (last s)))))))
 
 (defn items-since
   "Takes `items` posted after the specified DateTime object."
@@ -90,21 +90,28 @@
   (and (author? comment   "[deleted]")
        (= (comment :body) "[deleted]")))
 
-(defn first-reply [thing]
-  (-> thing :replies first))
+(defn x-post?
+  "Checks the link title for \"x-post\"
+  (and variants)."
+  [link] (re-find #"(?i)x-?post|cross-?post" (link :title)))
 
 ;; # Retrieval
 
-(defn link-from-url [url]
+(defn get-link
+  "Return a link object from the given permalink.
+  Includes comments on the link as `:replies`."
+  [url]
   (let [data     (get-parsed url)
         link     (ffirst data)
         comments (second data)]
     (assoc link :replies comments)))
 
-(def comments-from-url (comp :replies link-from-url))
+(def ^{:doc "Retreive comments from a url (a link page)."}
+  get-comments (comp :replies get-link))
 
 ;; Fix context bug
-(def comment-from-url (comp first-reply link-from-url))
+(def ^{:doc "Return a comment for the given permalink."}
+  get-comment (comp first :replies get-link))
 
 (defn with-replies
   "Reload the comment/link (e.g. from `items`)
@@ -150,6 +157,37 @@
 ;; -----
 
 (defn me
-  "Data about the currently logged in user."
+  "Data about the currently logged in user
+  from `/api/me.json`."
   [login] (get-parsed (reddit api me)
                       :login login))
+
+(defn get-user
+  "Account information for a user."
+  [username]
+  (get-parsed (str (reddit user) "/" username "/about")))
+
+(defn user-comments
+  "Lazy seq of all comments by a user."
+  [username]
+  (items (str (reddit user) "/" username)))
+
+(defn by-subreddit
+  "Filter comments by subreddit/list of subreddits."
+  [comments subreddits]
+  (let [subreddits (if (set? subreddits) subreddits #{subreddits})]
+    (filter (comp subreddits :subreddit) comments)))
+
+(defn total-score
+  "Add up the score for the given comments."
+  [comments]
+  (apply + (map :score comments)))
+
+(defn total-score'
+  "total-score adjusted for self-upvotes (which reddit
+  doesn't count)."
+  [comments]
+  (- (total-score comments) (count comments)))
+
+(defn score-per-comment [comments]
+  (double (/ (total-score comments) (count comments))))
