@@ -12,7 +12,7 @@
   (->> links
        (map #(-> % :replies first))
        (filter identity)
-       (filter #(> (:score %) 10))
+       (filter #(> (:score %) 1))
        (remove deleted-comment?)))
 
 (defn top-comment [links]
@@ -24,19 +24,19 @@
   (some #(author? comment %) ["Trapped_in_Robot" "Top-Comment-Bot"]))
 
 (defn format-comment [{:keys [body author permalink] :as comment}]
-  (paragraphs (if (bot-post? comment)
-                (quotify body)
-                body)
-              (italic
-                (str "~ " (hyperlink author permalink)))))
+  (p (if (bot-post? comment)
+       (quotify body)
+       body)
+     (i (str "~ " (hyperlink author permalink)))))
 
 ;; Number of times posted.
 
 (defn count-string [n]
   (condp = n
-    1 "once"
-    2 "twice"
-    3 "thrice"
+    1  "once"
+    2  "twice"
+    3  "thrice"
+    50 "more than fifty times"
     (str n " times")))
 
 ;; Time since last post
@@ -48,11 +48,13 @@
 (defn minutes  [t] (min-div t       60))
 (defn seconds  [t] (min-div t         ))
 
+(def time-fns {:hours hours :minutes minutes :seconds seconds})
+
 (defn time-str [t]
   (if-not (> (days t) 1)
-    (->> '[hours minutes seconds]
-         (map #(let [n ((eval %) t)]
-                 (if (> n 1) (str n " " %))))
+    (->> [:hours :minutes :seconds]
+         (map #(let [n ((time-fns %) t)]
+                 (if (> n 1) (str n " " (name %)))))
          (some identity))))
 
 (defn time-since-last-post [original reposts]
@@ -60,7 +62,8 @@
         ts  (->> reposts
                  (filter #(= (:subreddit %) (:subreddit original)))
                  (map #(- now (-> % :time .getTime)))
-                 (map #(/ % 1000)))]
+                 (map #(/ % 1000))
+                 (filter #(> 0 %)))]
     (if (seq ts)
       (time-str (apply min ts)))))
 
@@ -77,7 +80,7 @@
                              (str " (and less than " t " ago - stay classy, OP)"))
                            ". Above is the previous top comment."))
                  (if (bot-post? top-comment)
-                   "Come on, people, this is just getting ridiculous."))
+                   "^ Come on, people, this is just getting ridiculous."))
       :vote :up})))
 
 (def karma-police
@@ -86,7 +89,7 @@
    :subreddits   ["funny" "wtf" "pics"]
    :type         :link
    :login        users/trapped-in-robot
-   ; :log          (comp println str)
    :interval     2
-   :debug        :true
+   :delay        30
+   :retry        true
   })
