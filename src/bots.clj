@@ -11,9 +11,10 @@
       (mg/set-db! (mg/get-db "local")))))
 
 (defn start []
-  (robbit/start scp-bot      :scp-bot)
-  (robbit/start karma-police :karma-police)
-  nil)
+  (robbit/with-log robbit.log/print-fn
+    (robbit/start scp-bot      :scp-bot)
+    (robbit/start karma-police :karma-police)
+    nil))
 
 (defn stop []
   (robbit/stop :scp-bot)
