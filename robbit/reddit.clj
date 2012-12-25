@@ -5,7 +5,7 @@
             [cheshire.core  :as json]
             [reddit.url :refer (reddit)]))
 
-(def ^:private api-spacer (spacer 2000))
+(def api-spacer (spacer 2000))
 (defmacro api-call
   "Code blocks wrapped with `api-call` will not execute within
   two seconds of each other, eg
