@@ -7,14 +7,12 @@
   [& s]
   (clojure.string/replace (apply str s) #"(\A|\n\n)(.+)" "$1> $2"))
 
-; (defn superscript
-;   "^Superscript each word."
-;   [& s]
-;   (str/replace (apply str s) #"([^ \[*]+)" "^$1"))
-
 (defn superscript
   "^Superscript each word."
-  [& s] (str "^(" (apply str s) ")"))
+  [& s]
+  (-> (apply str s)
+      (str/replace #"([^ \[*]+)" "^$1")
+      (str/replace "^(" "^\\(")))
 
 (defn superscript-n
   "Apply superscript n times."

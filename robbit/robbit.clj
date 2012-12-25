@@ -1,15 +1,16 @@
 (ns robbit
   "A framework for running reddit bots."
   (:use      robbit.log robbit.response
-            [reddit :exclude (author?)]
+             reddit
              util.spacers)
-  (:require [reddit.url :as url]))
-
-;; NEEDS TO BE DELETED AND REWRITTEN COMPLETELY
+  (:require [reddit.url :as url])
+  (:import java.util.Calendar
+           java.util.Date))
 
 (defn- now [] (java.util.Date.))
+(def ^:private map' (comp dorun pmap))
 
-(defonce bots (atom {}))
+(defonce ^:private bots (atom {}))
 
 (defn- default-bot
   "A bot that doesn't do anything. Custom bots 'extend'
@@ -17,61 +18,83 @@
   []
   {:user-agent   "Unnamed bot made with robbit."  ; Short description + main account username.
    :type         :comment                         ; :comment/:link - choose which to respond to.
-   :handler      (fn [_] nil)                     ; fn to take a comment object and return a response map.
+   :handler      (fn [_] nil)                     ; fn to take a comment/link and return a response map.
    :subreddits   "all"                            ; String or vector of strings. Load comments/links from here.
    :login        nil                              ; Use reddit/login to generate a login.
    :interval     5                                ; Minutes between successive runs.
-   :last-run     (now)                            ; Date in the format "yyyy-MM-dd HH:mm:ss".
-   :debug        false                            ; Responses will be logged but not actually performed.
-   :log          log
+   :last-run     (now)                              ; Date
+   :delay        0
    :cancelled    (atom false)})                   ; Internal: the bot's thread will check this.
+
+(defn- update-last-run [bot date]
+  (swap! (bot :last-run) #(if (.after date %) date %)))
+
+(defn- subtract-mins [date mins]
+  (let [cal (Calendar/getInstance)]
+    (.setTime cal date)
+    (.add cal Calendar/MINUTE (- mins))
+    (.getTime cal)))
+
+(defn- bot-items* [{:keys [subreddits type last-run delay] :as bot}]
+  (->> subreddits
+       ((condp = type
+          :link    url/subreddit-new
+          :comment url/subreddit-comments))
+       (items-since @last-run)
+       #_(filter #(.before (:time %) (subtract-mins (Date.) delay)))))
+
+(defn- bot-items [{:keys [subreddits type last-run delay] :as bot}]
+  (->> subreddits
+       ((condp = type
+          :link    url/subreddit-new
+          :comment url/subreddit-comments))
+       (items-since @last-run)
+       (filter #(.before (:time %) (subtract-mins (Date.) delay)))))
+
+;; ------------------------
+;; User-friendly functions.
+;; ------------------------
+
+(defmacro debug [& forms]
+  `(binding [*debug* true]
+     ~@forms))
+
+(defmacro with-log [log & forms]
+  `(binding [*log* ~log]
+     ~@forms))
 
 (defn init-bot
   "Merge with the default bot and get ready to run."
   [bot key] (-> (default-bot)
                 (merge bot)
                 (assoc :key key)
-                (update-in [:last-run] atom)))
+                (assoc-in [:last-run] (atom (or (bot :last-run)
+                                                (subtract-mins (now) (get bot :delay 0)))))))
 
-(defn- author? [thing bot]
-  (= (thing :author) (-> bot :login :name)))
-
-(defn update-last-run [bot date]
-  (swap! (bot :last-run) #(if (.after date %) date %)))
-
-(defn bot-items [bot]
-  (->> (bot :subreddits)
-       ((if (= (bot :type) :link) url/subreddit-new
-                                  url/subreddit-comments))
-       (items-since @(bot :last-run))
-       (filter #(not (author? % bot)))))
-
-;; ------------------------
-;; User-friendly functions.
-;; ------------------------
-
-(defn run-once [bot]
-  (with-user-agent (bot :user-agent)
-    ((bot :log) (bot :key) " running: " (now))
+(defn run-once [{:keys [key handler user-agent retry] :as bot}]
+  (with-user-agent user-agent
     (let [items     (bot-items bot)
-          responses (map (bot :handler) items)]
+          responses (pmap handler items)]
+      (*log* key " running " (count items))
       (map' (fn [item response-map]
+              (if-not retry (update-last-run bot (item :time)))
               (map' (fn [[type data]]
+                      (update-last-run bot (item :time))
                       (handle-response bot (with-meta item {:response-type type}) data))
                     response-map))
             items responses))))
 
-(defn run-bot [bot]
-  (let [spacer (spacer (* (bot :interval) 60 1000))]
+(defn run-bot [{:keys [key interval cancelled] :as bot}]
+  (let [spacer (spacer (* interval 60 1000))]
     (loop []
       (spaced spacer
-        (when-not @(bot :cancelled)
+        (when-not @cancelled
           (try (run-once bot)
-            (catch Exception e ((bot :log) (str "Error running " (bot :key) "\n" e))))
+            (catch Exception e (*log* (str "Error running " key "\n" e))))
           (recur))))))
 
 (defn stop [key]
-  (reset! (-> key (@bots) :cancelled) true)
+  (reset! (-> @bots key :cancelled) true)
   (swap! bots dissoc key))
 
 (defn start
@@ -84,4 +107,4 @@
         (future (run-bot bot))
         (swap! bots assoc key bot))
       ; Or don't
-      (println "Login for" key "invalid:" (str "\n" (bot :login))))))
+      (*log* "Login for" key "invalid:" "\n" (pr-str (bot :login))))))

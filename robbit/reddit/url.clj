@@ -8,9 +8,6 @@
 ;; Subreddits can be provided in the form
 ;; `"subreddit"` or `["sr1" "sr2" ...]`
 
-; Obsolete
-; (defn- parse-subreddits [names] (if (string? names) [names] names))
-
 (defn subreddit
   "Links page for a given subreddit(s) (string or vector of strings)."
   [names]
@@ -25,5 +22,11 @@
   "New links page url for a given subreddit(s)."
   [names] (str (subreddit names) "/new"))
 
-(defn user [username]
-  (str (reddit u) "/" username))
+(defn user
+  "The user's submissions."
+  [username]
+  (str (reddit user) "/" username))
+
+(defn about-user
+  [username]
+  (str (reddit user) "/" username "/about"))

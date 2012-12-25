@@ -5,7 +5,7 @@
             [cheshire.core  :as json]
             [reddit.url :refer (reddit)]))
 
-(def api-spacer (spacer 2000))
+(def ^:private api-spacer (spacer 2000))
 (defmacro api-call
   "Code blocks wrapped with `api-call` will not execute within
   two seconds of each other, eg
@@ -52,28 +52,19 @@
 ;; Retreiving Items
 ;; ----------------
 
-(defn items-after
-  "Loads 1 page of the links/comments after the given one."
-  [item url limit]
-  (get-parsed url
-              :params {:limit limit
-                       :after (:name item)
-                       :sort  "new"}))
-
 (defn items
   "Returns a lazy sequence of all items at the given
   url, including subsequent pages. API calls spaced."
   [url & {:keys [params]}]
   (lazy-seq
-    (let [s (api-call;(items-after after url 1000)
-                      (get-parsed url :params (merge {:limit 1000
+    (let [s (api-call (get-parsed url :params (merge {:limit 1000
                                                       :sort  "new"}
                                                      params)))]
       (if-not (empty? s)
         (concat s (items url :params (assoc params :after (-> s last :name))))))))
 
 (defn items-since
-  "Takes `items` posted after the specified DateTime object."
+  "Takes all `items` posted after the specified Date."
   [date url] (take-while #(.after (% :time) date) (items url)))
 
 ;; --------------
@@ -114,7 +105,7 @@
 (def get-comment
   "Return a comment for the given permalink.
   Currently ignores context param."
-  (comp first :replies get-link))
+  (comp first get-comments))
 
 (defn with-replies
   "Reload the comment/link (e.g. from `items`)
@@ -176,24 +167,10 @@
       (user-comments \"user\" :params {:sort \"top\"
                                        :t    \"all\"})"
   [username & opts]
-  (apply items (str (reddit user) "/" username) opts))
+  (apply items (str (reddit user) "/" username "/comments") opts))
 
 (defn by-subreddit
   "Filter comments by subreddit/set of subreddits."
   [comments subreddits]
   (let [subreddits (if (set? subreddits) subreddits #{subreddits})]
     (filter (comp subreddits :subreddit) comments)))
-
-(defn total-score
-  "Add up the score for the given comments."
-  [comments]
-  (apply + (map :score comments)))
-
-(defn total-score'
-  "total-score adjusted for self-upvotes (which reddit
-  doesn't count)."
-  [comments]
-  (- (total-score comments) (count comments)))
-
-(defn score-per-comment [comments]
-  (double (/ (total-score comments) (count comments))))

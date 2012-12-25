@@ -1,7 +1,8 @@
 (ns robbit.response
-  "Handlers for bot responses.")
+  "Handlers for bot responses."
+  (:use reddit robbit.log))
 
-(def ^:dynamic *debug*)
+(def ^:dynamic *debug* false)
 
 (defmulti handle-response
   "This is applied to each pair of the response map, dispatching
@@ -10,19 +11,15 @@
   :reply."
   (fn [bot item data] (:response-type (meta item))))
 
-(defmethod handle-response :reply [bot item text]
-  (let [result (if-not (bot :debug)
+(defmethod handle-response :reply [bot {:keys [permalink body title time] :as item} text]
+  (let [result (if-not *debug*
                  (reply item text (bot :login))
-                 :debug)]
-    (update-last-run bot (item :time))
-    ((bot :log)
-      (item :permalink) "\n"
-      (item (if (comment? item) :body :title)) "\n"
-      "\n"
-      "Reply by " (-> bot :login :name) ":\n"
-      text "\n"
+                 text)]
+    (*log*
+      permalink "\n"
+      "Replied to by " (-> bot :login :name) "\n"
       result)))
 
 (defmethod handle-response :vote [bot item direction]
-  (when-not (bot :debug)
+  (when-not *debug*
     (vote item direction (bot :login))))
