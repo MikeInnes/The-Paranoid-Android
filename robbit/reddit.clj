@@ -63,9 +63,16 @@
       (if-not (empty? s)
         (concat s (items url :params (assoc params :after (-> s last :name))))))))
 
+(defn take-while-chunked [pred coll]
+  (lazy-seq
+    (let [first (filter pred (take 10 coll))
+          rest  (drop 10 coll)]
+      (when-let [s (seq first)]
+        (concat s (take-while-chunked pred rest))))))
+
 (defn items-since
   "Takes all `items` posted after the specified Date."
-  [date url] (take-while #(.after (% :time) date) (items url)))
+  [date url] (take-while-chunked #(.after (% :time) date) (items url)))
 
 ;; --------------
 ;; Links/comments
