@@ -35,14 +35,6 @@
     (.add cal Calendar/MINUTE (- mins))
     (.getTime cal)))
 
-(defn- bot-items* [{:keys [subreddits type last-run delay] :as bot}]
-  (->> subreddits
-       ((condp = type
-          :link    url/subreddit-new
-          :comment url/subreddit-comments))
-       (items-since @last-run)
-       #_(filter #(.before (:time %) (subtract-mins (Date.) delay)))))
-
 (defn- bot-items [{:keys [subreddits type last-run delay] :as bot}]
   (->> subreddits
        ((condp = type
