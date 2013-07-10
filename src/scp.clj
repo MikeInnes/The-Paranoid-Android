@@ -21,7 +21,7 @@
   "Funny, how just when you think life can't possibly get any worse it suddenly does."
   ;; Not actual quotes.
   "I've been talking to the reddit server. It hates me."
-  "Here I am, brain the size of a planet, and they ask me to post links. Call that job satisfaction, 'cause I don't. "
+  "Here I am, brain the size of a planet, posting links. Call that job satisfaction, 'cause I don't. "
   "I would correct your grammar as well, but you wouldn't listen. No one ever does."])
 
 (defn scp-url [n]
@@ -62,7 +62,7 @@
 (def scp-bot
   {:handler      (comp scp-reply :body)
    :user-agent   "/r/scp helper by /u/one_more_minute"
-   :subreddits   "scp"
+   :subreddits   ["scp" "InteractiveFoundation"]
    :login        users/marvin
-   :interval     2
+   :interval     1
   })

@@ -10,11 +10,12 @@
       (mg/connect!)
       (mg/set-db! (mg/get-db "local")))))
 
-(defn start [& [file-log]]
+(defn start [& [file-log debug]]
   (robbit/with-log (if file-log robbit.log/file-log robbit.log/print-fn)
-    (robbit/start scp-bot      :scp-bot)
-    (robbit/start karma-police :karma-police)
-    nil))
+    (binding [robbit.response/*debug* debug])
+      (robbit/start scp-bot      :scp-bot)
+      #_(robbit/start karma-police :karma-police)))
+  nil)
 
 (defn stop []
   (robbit/stop :scp-bot)
