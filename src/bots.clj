@@ -12,7 +12,7 @@
 
 (defn start [& [file-log debug]]
   (robbit/with-log (if file-log robbit.log/file-log robbit.log/print-fn)
-    (binding [robbit.response/*debug* debug])
+    (binding [robbit.response/*debug* debug]
       (robbit/start scp-bot      :scp-bot)
       #_(robbit/start karma-police :karma-police)))
   nil)
