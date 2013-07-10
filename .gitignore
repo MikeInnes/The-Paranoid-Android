@@ -12,3 +12,4 @@ pom.xml
 /data
 log.txt
 logs.txt
+.lein-repl-history

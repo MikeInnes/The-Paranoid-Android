@@ -33,15 +33,27 @@
 (defn exists? [n]
   (-> n scp-url (http/get {:throw-exceptions false}) :status (not= 404)))
 
+(defn remove-brackets [s]
+  (loop [s' ""
+         [first & rest] (map str s)
+         brackets 0]
+    (cond
+      (nil? first)       s'
+      (#{"(" "["} first) (recur s' rest (inc brackets))
+      (#{")" "]"} first) (recur s' rest (dec brackets))
+      (> brackets 0)     (recur s' rest brackets)
+      :else              (recur (str s' first) rest brackets))))
+
 (defn get-nums
   "Detects numbers 000-1999, including extensions."
-  [s] (re-seq #"(?i)(?x)                     # Ignore case, comment mode
-                (?<! \d                  )   # Not preceded by a digit
-                1? \d{3}                     # 000 - 1999
-                (?: -EX|-ARC|-J|-D       )?  # Optional extensions
-                (?= \ |\.|,|;|:|\n|\Z|\? )   # Followed by punctuation (i.e. not a url)
-                (?! \.\d                 )   # Not followed by a decimal point"
-              s))
+  [s] (re-seq #"(?i)(?x)              # Ignore case, comment mode
+                (?<! \d           )   # Not preceded by a digit
+                (?<! `            )   # Not preceded by `
+                1? \d{3}              # 000 - 1999
+                (?: -EX|-ARC|-J|-D)?  # Optional extensions
+                (?! `             )   # Not followed by a `
+                (?! \.\d          )   # Not followed by a decimal point"
+              (remove-brackets s)))
 
 (defn probably
   "True with probability n."
@@ -64,5 +76,5 @@
    :user-agent   "/r/scp helper by /u/one_more_minute"
    :subreddits   ["scp" "InteractiveFoundation"]
    :login        users/marvin
-   :interval     1
+   :interval     0.5
   })
