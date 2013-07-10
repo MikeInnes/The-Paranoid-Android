@@ -10,8 +10,8 @@
       (mg/connect!)
       (mg/set-db! (mg/get-db "local")))))
 
-(defn start []
-  (robbit/with-log robbit.log/print-fn
+(defn start [& [file-log]]
+  (robbit/with-log (if file-log robbit.log/file-log robbit.log/print-fn)
     (robbit/start scp-bot      :scp-bot)
     (robbit/start karma-police :karma-police)
     nil))
