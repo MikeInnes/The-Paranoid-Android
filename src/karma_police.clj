@@ -67,16 +67,16 @@
     (if (seq ts)
       (time-str (apply min ts)))))
 
-(defn link-reply [url]
-  (when-let [reposts (-> url reposts seq)]
+(defn link-reply [{:keys [url permalink] :as link}]
+  (when-let [reposts (-> permalink reposts seq)]
     (when-let [top-comment (top-comment reposts)]
       {:reply (p (format-comment top-comment)
                  ---
                  (i (sn 2 "This image has been submitted "
                            (l (count-string (count reposts))
-                              (karmadecay-url url))
+                              (karmadecay-url permalink))
                            " before"
-                           (if-let [t (time-since-last-post (get-link url) reposts)]
+                           (if-let [t (time-since-last-post link reposts)]
                              (str " (and less than " t " ago - stay classy, OP)"))
                            ". Above is the previous top comment."))
                  (if (bot-post? top-comment)
@@ -84,12 +84,12 @@
       :vote :up})))
 
 (def karma-police
-  {:handler      (comp link-reply :permalink)
+  {:handler      link-reply
    :user-agent   "Top Comment Bot by /u/one_more_minute"
    :subreddits   ["funny" "wtf" "pics"]
    :type         :link
    :login        users/trapped-in-robot
    :interval     2
-   :delay        30
+   ; :delay        30
    :retry        true
   })

@@ -8,9 +8,9 @@
 
 ; (def test-url "http://www.reddit.com/r/pics/comments/13edku/a_kitten_in_some_holiday_lights/")
 
-(defn karmadecay-url [reddit-url]
+(defn karmadecay-url [url]
   (str "http://www.karmadecay.com/"
-       (clojure.string/replace reddit-url "http://" "")))
+       (clojure.string/replace url #"https?://" "")))
 
 (defn share-text [html]
   (-> (select html [:textarea#share1]) first text))
