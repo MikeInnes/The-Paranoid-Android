@@ -74,7 +74,7 @@
 (def scp-bot
   {:handler      (comp scp-reply :body)
    :user-agent   "/r/scp helper by /u/one_more_minute"
-   :subreddits   ["scp" "InteractiveFoundation"]
+   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game"]
    :login        users/marvin
    :interval     0.5
   })
