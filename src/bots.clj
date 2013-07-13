@@ -1,7 +1,7 @@
 (ns bots
   (:require [monger.core :as mg]
              robbit)
-  (:use scp karma-police))
+  (:use scp #_karma-police))
 
 (defn mongo-connect! []
   (if-let [url (System/getenv "MONGOHQ_URL")]
