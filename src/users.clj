@@ -19,6 +19,6 @@
               users))))
 
 (defusers
-  marvin           "The-Paranoid-Android" "imsoodepressed"
-  top-comment      "Top-Comment-Bot"      "insertwittyresponse"
-  trapped-in-robot "Trapped_in_Robot"     "insertwittycomment")
+  marvin           "The-Paranoid-Android" "imsoodepressed")
+  ; top-comment      "Top-Comment-Bot"      "insertwittyresponse"
+  ; trapped-in-robot "Trapped_in_Robot"     "insertwittycomment")
