@@ -1,6 +1,6 @@
 (ns scp
   "Replies to mentions of SCP-wiki articles with links, on /r/scp."
-  (:use reddit.format clarity.core)
+  (:use reddit.format [clarity core utils])
   (:require  users
             [clojure.string  :as str]
             [clj-http.client :as http]))
@@ -69,8 +69,18 @@ defn probably
 
 def replies : atom [false {}]
 
+defn repeat? [number link]
+  first
+    swap! replies
+      λ [[_ links]]
+        if-let [numbers (links link)]
+          if (contains? numbers number)
+            [true links]
+            [false (assoc links link (conj numbers number))]
+          [false (assoc links link #{number})]
+
 defn scp-reply [{:keys [body link_id]}]
-  when-let [nums (->> body get-nums distinct (filter exists?) #_(remove #(repeat? % link_id)) seq)]
+  when-let [nums (->> body get-nums distinct (filter exists?) (remove #(repeat? % link_id)) seq)]
     {:reply (paragraphs
               (str (str/join ", " (map scp-link nums)) ".")
                 (cond
