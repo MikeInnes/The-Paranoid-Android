@@ -4,4 +4,4 @@
                  [com.novemberain/monger "1.2.0"]
                  [enlive              "1.0.1"]
                  [robbit "1.0.0"]
-                 [one_more_minute/clarity "0.1.0"]])
+                 [one_more_minute/clarity "0.1.1"]])
