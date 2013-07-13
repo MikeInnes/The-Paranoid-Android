@@ -25,8 +25,18 @@ def marvin-quotes
     "Funny, how just when you think life can't possibly get any worse it suddenly does."
     ;; Not actual quotes.
     "I've been talking to the reddit server. It hates me."
-    "Here I am, brain the size of a planet, posting links. Call that job satisfaction, 'cause I don't. "
+    "Here I am, brain the size of a planet, posting links. Call that job satisfaction, 'cause I don't."
+    "Brain the size of a planet, and here I am, a glorified spam bot. Sometimes I'm almost glad my pride circuit is broken.\n\nThen I remember my appreciation circuit is too."
     "I would correct your grammar as well, but you wouldn't listen. No one ever does."
+    λ let [games (-> (java.util.Date.) .getTime (/ 1000) int (* 42))]
+        (str "Nothing left to do except play chess. Against myself.\n\n"
+             games " games so far, " games " draws.")
+
+defn get-quote []
+  let [q (rand-nth marvin-quotes)]
+    (cond
+      (string? q) q
+      (fn? q) (q))
 
 defn scp-url [n]
   str "http://scp-wiki.wikidot.com/scp-" n
