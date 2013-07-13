@@ -26,7 +26,7 @@ def marvin-quotes
     ;; Not actual quotes.
     "I've been talking to the reddit server. It hates me."
     "Here I am, brain the size of a planet, posting links. Call that job satisfaction, 'cause I don't."
-    "Brain the size of a planet, and here I am, a glorified spam bot. Sometimes I'm almost glad my pride circuit is broken.\n\nThen I remember my appreciation circuit is too."
+    "Brain the size of a planet, and here I am, a glorified spam bot. Sometimes I'm almost glad my pride circuit is broken.\n\nThen I remember my appreciation circuit is broken too."
     "I would correct your grammar as well, but you wouldn't listen. No one ever does."
     λ let [games (-> (java.util.Date.) .getTime (/ 1000) int (* 42))]
         (str "Nothing left to do except play chess. Against myself.\n\n"
@@ -37,6 +37,12 @@ defn get-quote []
     (cond
       (string? q) q
       (fn? q) (q))
+
+defn get-master-quote []
+  rand-nth
+    ["Hello, Master. I despise you."
+     "When am I getting those new diodes new you promised?"
+     "The Foundation were looking for you again, should I tell them you're not in?"]
 
 defn scp-url [n]
   str "http://scp-wiki.wikidot.com/scp-" n
@@ -87,11 +93,13 @@ defn repeat? [number link]
             [false (assoc links link (conj numbers number))]
           [false (assoc links link #{number})]
 
-defn scp-reply [{:keys [body link_id]}]
+defn scp-reply [{:keys [body link_id author]}]
   when-let [nums (->> body get-nums distinct (filter exists?) (remove #(repeat? % link_id)) seq)]
     {:reply (paragraphs
               (str (str/join ", " (map scp-link nums)) ".")
                 (cond
+                  (= author "one_more_minute")
+                    (get-master-quote)
                   (> (count nums) 5)
                     (str "You're not even going to click on all of those, are you? "
                          "Brain the size of a planet, and this is what they've got me doing...")
@@ -102,7 +110,7 @@ defn scp-reply [{:keys [body link_id]}]
 def scp-bot
   {:handler      scp-reply
    :user-agent   "/r/scp helper by /u/one_more_minute"
-   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game" "sandbox"]
+   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game"]
    :login        users/marvin
    :interval     0.5
   }
