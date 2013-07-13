@@ -86,13 +86,13 @@ defn scp-reply [{:keys [body link_id]}]
                     (str "You're not even going to click on all of those, are you? "
                          "Brain the size of a planet, and this is what they've got me doing...")
                   (probably 1/10)
-                    (rand-nth marvin-quotes)))
+                    (get-quote)))
      :vote  :up}
 
 def scp-bot
   {:handler      scp-reply
    :user-agent   "/r/scp helper by /u/one_more_minute"
-   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game"]
+   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game" "sandbox"]
    :login        users/marvin
    :interval     0.5
   }
