@@ -34,10 +34,8 @@ defn scp-url [n]
 defn scp-link [n]
   hyperlink (str "SCP-" n) (scp-url n)
 
-defn exists?* [n]
+defn exists? [n]
   -> n scp-url (http/get {:throw-exceptions false}) :status (not= 404)
-
-def exists? : memoize exists?
 
 defn remove-brackets [s]
   loop [s' ""
