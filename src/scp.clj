@@ -44,7 +44,7 @@ defn get-master-quote []
   rand-nth
     ["Hello, Master. I despise you."
      "When am I getting those new diodes new you promised?"
-     "The Foundation were looking for you again, should I tell them you're not in?"]
+     "Those agents were looking for you again, should I tell them you're not in?"]
 
 defn scp-url [n]
   str "http://scp-wiki.wikidot.com/scp-" n
@@ -110,11 +110,11 @@ def repeat? : λ false
 defn scp-reply [{:keys [body link_id author]}]
   when-let [links (->> body get-nums
                             (remove #(repeat? % link_id))
-                            (concat [] (get-hidden-nums body))
+                            ((λ concat % (get-hidden-nums body)))
                             distinct
                             (filter exists?)
                             (map scp-link)
-                            (concat [] (get-hidden-links body))
+                            ((λ concat % (get-hidden-links body)))
                             seq)]
     {:reply (paragraphs
               (str (str/join ", " links) ".")
