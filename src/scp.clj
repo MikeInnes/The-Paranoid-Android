@@ -73,7 +73,7 @@ defn get-nums
            1? \d{3}              # 000 - 1999
            (?: -EX|-ARC|-J|-D)?  # Optional extensions
            (?! `             )   # Not followed by a `
-           (?! \.\d          )   # Not followed by a decimal point"
+           (?! \.\d | \d     )   # Not followed by a decimal point or digit"
          remove-brackets s
 
 defn probably
