@@ -5,6 +5,8 @@
             [clojure.string  :as str]
             [clj-http.client :as http]))
 
+(def hidden-link-reg #"(?x)\[\]\(([^\)]*?)\|(.*?)\)")
+
 (use-clarity)
 (clarity
 
@@ -76,6 +78,16 @@ defn get-nums
            (?! \.\d | \d     )   # Not followed by a decimal point or digit"
          remove-brackets s
 
+defn get-hidden-nums [s]
+  map last
+    re-seq #"(?x)\[\]\(http://(1? \d{3})\)" s
+
+defn get-hidden-links [s]
+  map
+    λ [[_ url name]]
+      hyperlink name url
+    re-seq hidden-link-reg s
+
 defn probably
   "True with probability n."
   [n]
@@ -93,14 +105,23 @@ defn repeat? [number link]
             [false (assoc links link (conj numbers number))]
           [false (assoc links link #{number})]
 
+def repeat? : λ false
+
 defn scp-reply [{:keys [body link_id author]}]
-  when-let [nums (->> body get-nums distinct (filter exists?) (remove #(repeat? % link_id)) seq)]
+  when-let [links (->> body get-nums
+                            (remove #(repeat? % link_id))
+                            (concat [] (get-hidden-nums body))
+                            distinct
+                            (filter exists?)
+                            (map scp-link)
+                            (concat [] (get-hidden-links body))
+                            seq)]
     {:reply (paragraphs
-              (str (str/join ", " (map scp-link nums)) ".")
+              (str (str/join ", " links) ".")
                 (cond
                   (= author "one_more_minute")
                     (get-master-quote)
-                  (> (count nums) 5)
+                  (> (count links) 5)
                     (str "You're not even going to click on all of those, are you? "
                          "Brain the size of a planet, and this is what they've got me doing...")
                   (probably 1/10)
@@ -110,7 +131,7 @@ defn scp-reply [{:keys [body link_id author]}]
 def scp-bot
   {:handler      scp-reply
    :user-agent   "/r/scp helper by /u/one_more_minute"
-   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game"]
+   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game" "sandbox"]
    :login        users/marvin
    :interval     0.5
   }
