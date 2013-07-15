@@ -5,6 +5,7 @@
             [clojure.string  :as str]
             [clj-http.client :as http]))
 
+;; Can't be written within clarity due to issue #2
 (def hidden-link-reg #"(?x)\[\]\(([^\)]*?)\|(.*?)\)")
 
 (use-clarity)
