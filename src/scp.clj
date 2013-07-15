@@ -106,8 +106,6 @@ defn repeat? [number link]
             [false (assoc links link (conj numbers number))]
           [false (assoc links link #{number})]
 
-def repeat? : λ false
-
 defn scp-reply [{:keys [body link_id author]}]
   when-let [links (->> body get-nums
                             (remove #(repeat? % link_id))
