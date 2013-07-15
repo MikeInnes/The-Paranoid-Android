@@ -70,13 +70,13 @@ defn remove-brackets [s]
 defn get-nums
   "Detects numbers 000-1999, including extensions."
   [s]
-  re-seq #"(?i)(?x)              # Ignore case, comment mode
-           (?<! \d           )   # Not preceded by a digit
-           (?<! `            )   # Not preceded by `
-           1? \d{3}              # 000 - 1999
-           (?: -EX|-ARC|-J|-D)?  # Optional extensions
-           (?! `             )   # Not followed by a `
-           (?! \.\d | \d     )   # Not followed by a decimal point or digit"
+  re-seq #"(?i)(?x)                 # Ignore case, comment mode
+           (?<! \d \d\,         )   # Not preceded by a digit
+           (?<! `               )   # Not preceded by `
+           1? \d{3}                 # 000 - 1999
+           (?: -EX|-ARC|-J|-D   )?  # Optional extensions
+           (?! `                )   # Not followed by a `
+           (?! \.\d | \d | \,\d )   # Not followed by a decimal point or digit"
          remove-brackets s
 
 defn get-hidden-nums [s]
