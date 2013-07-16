@@ -71,7 +71,7 @@ defn get-nums
   "Detects numbers 000-1999, including extensions."
   [s]
   re-seq #"(?i)(?x)                 # Ignore case, comment mode
-           (?<! \d \d\,         )   # Not preceded by a digit
+           (?<! \d | \d\,       )   # Not preceded by a digit
            (?<! `               )   # Not preceded by `
            1? \d{3}                 # 000 - 1999
            (?: -EX|-ARC|-J|-D   )?  # Optional extensions
