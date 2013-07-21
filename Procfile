@@ -1,1 +1,1 @@
-bots: lein run -m bots/start
+bots: lein run -m scp/start
