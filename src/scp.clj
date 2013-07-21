@@ -1,6 +1,7 @@
 (ns scp
   "Replies to mentions of SCP-wiki articles with links, on /r/scp."
-  (:use reddit.format [clarity core utils])
+  (:use reddit [reddit format url]
+        [clarity core utils])
   (:require  users
             [clojure.string  :as str]
             [clj-http.client :as http]))
@@ -32,7 +33,7 @@ def marvin-quotes
     "Brain the size of a planet, and here I am, a glorified spam bot. Sometimes I'm almost glad my pride circuit is broken.\n\nThen I remember my appreciation circuit is broken too."
     "I would correct your grammar as well, but you wouldn't listen. No one ever does."
     λ let [games (-> (java.util.Date.) .getTime (/ 1000) int (* 42))]
-        (str "Nothing left to do except play chess. Against myself.\n\n"
+        (str "Nothing left to do except play chess against myself.\n\n"
              games " games so far, " games " draws.")
 
 defn get-quote []
@@ -106,33 +107,39 @@ defn repeat? [number link]
             [false (assoc links link (conj numbers number))]
           [false (assoc links link #{number})]
 
-defn scp-reply [{:keys [body link_id author]}]
-  when-let [links (->> body get-nums
-                            (remove #(repeat? % link_id))
-                            ((λ concat % (get-hidden-nums body)))
-                            distinct
-                            (filter exists?)
-                            (map scp-link)
-                            ((λ concat % (get-hidden-links body)))
-                            seq)]
-    {:reply (paragraphs
-              (str (str/join ", " links) ".")
-                (cond
-                  (= author "one_more_minute")
-                    (get-master-quote)
-                  (> (count links) 5)
-                    (str "You're not even going to click on all of those, are you? "
-                         "Brain the size of a planet, and this is what they've got me doing...")
-                  (probably 1/10)
-                    (get-quote)))
-     :vote  :up}
+defn get-all-links [{:keys [body link_id]}]
+  ->> body
+      get-nums
+      remove #(repeat? % link_id)
+      ((λ concat % (get-hidden-nums body)))
+      distinct
+      filter exists?
+      map scp-link
+      ((λ concat % (get-hidden-links body)))
+      seq
 
-def scp-bot
-  {:handler      scp-reply
-   :user-agent   "/r/scp helper by /u/one_more_minute"
-   :subreddits   ["scp" "InteractiveFoundation" "SCP_Game" "sandbox"]
-   :login        users/marvin
-   :interval     0.5
-  }
+defn scp-reply [{:keys [body link_id author links] :as comment}]
+    println
+      reply comment
+            paragraphs
+              str (str/join ", " links) "."
+              (cond
+                (= author "one_more_minute")
+                  (get-master-quote)
+                (> (count links) 5)
+                  (str "You're not even going to click on all of those, are you? "
+                       "Brain the size of a planet, and this is what they've got me doing...")
+                (probably 1/10)
+                  (get-quote))
+    vote comment :up
+
+defn start []
+  login! "The-Paranoid-Android" "imsoodepressed"
+  set-user-agent! "/r/scp helper by /u/one_more_minute"
+  ->> '[scp InteractiveFoundation SCP_Game sandbox] subreddit-comments new-items
+      map : λ assoc % :links (get-all-links %)
+      filter :links
+      map scp-reply
+      dorun
 
 )
