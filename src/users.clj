@@ -18,7 +18,7 @@
                 `(def ~sym (reddit/login ~user ~pass)))
               users))))
 
-(defusers
-  marvin           "The-Paranoid-Android" "imsoodepressed")
-  ; top-comment      "Top-Comment-Bot"      "insertwittyresponse"
-  ; trapped-in-robot "Trapped_in_Robot"     "insertwittycomment")
+; (defusers
+;   marvin           "The-Paranoid-Android" "imsoodepressed")
+;   top-comment      "Top-Comment-Bot"      "insertwittyresponse"
+;   trapped-in-robot "Trapped_in_Robot"     "insertwittycomment")
