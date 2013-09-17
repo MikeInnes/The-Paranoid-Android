@@ -1,16 +1,12 @@
 (ns scp
   "Replies to mentions of SCP-wiki articles with links, on /r/scp."
-  (:use reddit [reddit format url]
-        [clarity core utils])
+  (:use reddit reddit.format
+        chiara)
   (:require  users
             [clojure.string  :as str]
             [clj-http.client :as http]))
 
-;; Can't be written within clarity due to issue #2
-(def hidden-link-reg #"(?x)\[\]\(([^\)]*?)\|(.*?)\)")
-
-(use-clarity)
-(clarity
+(use-chiara) (chiara
 
 def marvin-quotes
   list
@@ -88,7 +84,7 @@ defn get-hidden-links [s]
   map
     λ [[_ url name]]
       hyperlink name url
-    re-seq hidden-link-reg s
+    re-seq #"(?x)\[\]\(([^\)]*?)\|(.*?)\)" s
 
 defn probably
   "True with probability n."
@@ -134,12 +130,16 @@ defn scp-reply [{:keys [body link_id author links] :as comment}]
     vote comment :up
 
 defn start []
-  login! "The-Paranoid-Android" "imsoodepressed"
-  set-user-agent! "/r/scp helper by /u/one_more_minute"
-  ->> '[scp InteractiveFoundation SCP_Game sandbox] subreddit-comments new-items
-      map : λ assoc % :links (get-all-links %)
-      filter :links
-      map scp-reply
-      dorun
+  try
+
+    login! "The-Paranoid-Android" "imsoodepressed"
+    set-user-agent! "/r/scp helper by /u/one_more_minute"
+
+    ->> '[scp InteractiveFoundation SCP_Game sandbox] subreddit-comments new-items
+        map : λ assoc % :links (get-all-links %)
+        filter :links
+        domap scp-reply
+
+    catch Exception e (-> e .getMessage println) (start)
 
 )
