@@ -121,16 +121,51 @@ defn scp-reply [{:keys [body link_id author links] :as comment}]
               (get-quote))
     vote comment :up
 
+defn start-scp []
+  try
+
+    ->> '[scp InteractiveFoundation SCP_Game sandbox] subreddit-comments new-items
+        map : λ assoc % :links (get-all-links %)
+        filter :links
+        domap scp-reply
+
+    catch Exception e (-> e .getMessage println) (start-scp)
+
+;; ---------------------------
+;; Catching SCPs across reddit
+;; ---------------------------
+
+defn get-scp-links [{:keys [body]}]
+  ->> body
+      re-seq #"(?x) \[\] \(http://scp- ([^\)]+ )\)"
+      map last
+      distinct
+      filter exists?
+      map scp-link
+      seq
+
+defn start-global []
+  try
+
+    ->> :all subreddit-comments new-items
+        map : λ assoc % :links (get-scp-links %)
+        filter :links
+        domap scp-reply
+
+    catch Exception e (-> e .getMessage println) (start-global)
+
+;; ----
+;; Init
+;; ----
+
 defn start []
   try
 
     login! "The-Paranoid-Android" "imsoodepressed"
     set-user-agent! "/r/scp helper by /u/one_more_minute"
 
-    ->> '[scp InteractiveFoundation SCP_Game sandbox] subreddit-comments new-items
-        map : λ assoc % :links (get-all-links %)
-        filter :links
-        domap scp-reply
+    future : start-scp
+    future : start-global
 
     catch Exception e (-> e .getMessage println) (start)
 
