@@ -1,1 +1,1 @@
-bots: lein run -m scp/start
+bots: lein trampoline run -m scp/start

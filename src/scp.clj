@@ -1,12 +1,18 @@
 (ns scp
   "Replies to mentions of SCP-wiki articles with links, on /r/scp."
-  (:use reddit reddit.format
-        chiara)
-  (:require  users
-            [clojure.string  :as str]
-            [clj-http.client :as http]))
+  (use reddit
+       reddit.format
+       reddit.util
+       chiara)
+  (require users
+           [clojure.string  :as str]
+           [clj-http.client :as http]))
 
 (use-chiara) (chiara
+
+;; ------
+;; Quotes
+;; ------
 
 def marvin-quotes
   list
@@ -50,19 +56,15 @@ defn scp-url [n]
 defn scp-link [n]
   hyperlink (str "SCP-" n) (scp-url n)
 
-defn exists? [n]
-  -> n scp-url (http/get {:throw-exceptions false}) :status (not= 404)
+;; ---------------
+;; Extracting Nums
+;; ---------------
 
-defn remove-brackets [s]
-  loop [s' ""
-        [first & rest] (map str s)
-        brackets 0]
-    (cond
-      (nil? first)       s'
-      (#{"(" "["} first) (recur s' rest (inc brackets))
-      (#{")" "]"} first) (recur s' rest (dec brackets))
-      (> brackets 0)     (recur s' rest brackets)
-      :else              (recur (str s' first) rest brackets))
+defn remove-links [s]
+  -> s
+     str/replace #"\[[^\]]*\] *\([^\)]*\)" "" ; Markdown links []()
+     str/replace #"(?:http|https)://[^ ]*" "" ; URLs
+     str/replace #"(?i)110[- ]Montauk" ""
 
 defn get-nums
   "Detects numbers 000-1999, including extensions."
@@ -71,10 +73,14 @@ defn get-nums
            (?<! \d | \d\,       )   # Not preceded by a digit
            (?<! `               )   # Not preceded by `
            1? \d{3}                 # 000 - 1999
-           (?: -EX|-ARC|-J|-D   )?  # Optional extensions
+           (?: - [a-zA-Z0-9-]*  )?  # Optional extensions
            (?! `                )   # Not followed by a `
            (?! \.\d | \d | \,\d )   # Not followed by a decimal point or digit"
-         remove-brackets s
+         remove-links s
+
+;; ------------
+;; Hidden links
+;; ------------
 
 defn get-hidden-nums [s]
   map last
@@ -86,27 +92,13 @@ defn get-hidden-links [s]
       hyperlink name url
     re-seq #"(?x)\[\]\(([^\)]*?)\|(.*?)\)" s
 
-defn probably
-  "True with probability n."
-  [n]
-  < (rand) n
-
-def replies : atom [false {}]
-
-defn repeat? [number link]
-  first
-    swap! replies
-      λ [[_ links]]
-        if-let [numbers (links link)]
-          if (contains? numbers number)
-            [true links]
-            [false (assoc links link (conj numbers number))]
-          [false (assoc links link #{number})]
+defn exists? [n]
+  -> n scp-url (http/get {:throw-exceptions false}) :status (not= 404)
 
 defn get-all-links [{:keys [body link_id]}]
   ->> body
       get-nums
-      remove #(repeat? % link_id)
+      remove #(repeat? [% link_id])
       ((λ concat % (get-hidden-nums body)))
       distinct
       filter exists?
@@ -117,16 +109,16 @@ defn get-all-links [{:keys [body link_id]}]
 defn scp-reply [{:keys [body link_id author links] :as comment}]
     println
       reply comment
-            paragraphs
-              str (str/join ", " links) "."
-              (cond
-                (= author "one_more_minute")
-                  (get-master-quote)
-                (> (count links) 5)
-                  (str "You're not even going to click on all of those, are you? "
-                       "Brain the size of a planet, and this is what they've got me doing...")
-                (probably 1/10)
-                  (get-quote))
+        paragraphs
+          str (str/join ", " links) "."
+          (cond
+            (= author "one_more_minute")
+              (get-master-quote)
+            (> (count links) 5)
+              (str "You're not even going to click on all of those, are you? "
+                   "Brain the size of a planet, and this is what they've got me doing...")
+            (< (rand) 1/10)
+              (get-quote))
     vote comment :up
 
 defn start []
