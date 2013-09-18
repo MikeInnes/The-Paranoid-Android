@@ -137,7 +137,7 @@ defn start-scp []
 
 defn get-scp-links [{:keys [body]}]
   ->> body
-      re-seq #"(?x) \[\] \(http://scp- ([^\)]+ )\)"
+      re-seq #"(?x)(?i) \[\] \(http://scp- ([^\)]+ )\)"
       map last
       distinct
       filter exists?
