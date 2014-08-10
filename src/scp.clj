@@ -71,7 +71,7 @@ defn get-nums
   re-seq #"(?i)(?x)                 # Ignore case, comment mode
            (?<! \d | \d\,       )   # Not preceded by a digit
            (?<! `               )   # Not preceded by `
-           1? \d{3}                 # 000 - 1999
+           \d+                      # The number
            (?: - [a-zA-Z0-9-]*  )?  # Optional extensions
            (?! `                )   # Not followed by a `
            (?! \.\d | \d | \,\d )   # Not followed by a decimal point or digit"
