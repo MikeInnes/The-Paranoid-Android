@@ -6,8 +6,7 @@
        chiara)
   (require users
            [org.httpkit.client :as http]
-           [clojure.string  :as str]
-           [clj-http.client :as http]))
+           [clojure.string  :as str]))
 
 (use-chiara) (chiara
 
