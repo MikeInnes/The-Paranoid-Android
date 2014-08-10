@@ -120,10 +120,11 @@ defn scp-reply [{:keys [body link_id author links] :as comment}]
               (get-quote))
     vote comment :up
 
+def subreddits '[scp InteractiveFoundation SCP_Game sandboxtest]
+
 defn start-scp []
   try
-
-    ->> '[scp InteractiveFoundation SCP_Game sandbox] subreddit-comments new-items
+    ->> subreddits subreddit-comments new-items
         map : λ assoc % :links (get-all-links %)
         filter :links
         domap scp-reply
@@ -145,7 +146,6 @@ defn get-scp-links [{:keys [body]}]
 
 defn start-global []
   try
-
     ->> :all subreddit-comments new-items
         map : λ assoc % :links (get-scp-links %)
         filter :links
@@ -159,7 +159,6 @@ defn start-global []
 
 defn start []
   try
-
     login! "The-Paranoid-Android" "imsoodepressed"
     set-user-agent! "/r/scp helper by /u/one_more_minute"
 
