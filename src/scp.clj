@@ -18,7 +18,6 @@ def marvin-quotes
   list
     "I think you ought to know I'm feeling very depressed."
     "I'd make a suggestion, but you wouldn't listen. No one ever does."
-    ; "I've been talking to the main computer. It hates me."
     "I've calculated your chance of survival, but I don't think you'll like it."
     "I have a million ideas, but, they all point to certain death."
     "Now I've got a headache."
@@ -32,7 +31,7 @@ def marvin-quotes
     ;; Not actual quotes.
     "I've been talking to the reddit server. It hates me."
     "Here I am, brain the size of a planet, posting links. Call that job satisfaction, 'cause I don't."
-    "Brain the size of a planet, and here I am, a glorified spam bot. Sometimes I'm almost glad my pride circuit is broken.\n\nThen I remember my appreciation circuit is broken too."
+    "Brain the size of a planet, and here I am, a glorified spam bot. Sometimes I'm almost glad my pride circuit is broken.\n\nThen I remember my appreciation circuit is broken, too."
     "I would correct your grammar as well, but you wouldn't listen. No one ever does."
     λ let [games (-> (java.util.Date.) .getTime (/ 1000) int (* 42))]
         (str "Nothing left to do except play chess against myself.\n\n"
