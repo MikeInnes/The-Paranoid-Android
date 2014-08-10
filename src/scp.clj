@@ -5,6 +5,7 @@
        reddit.util
        chiara)
   (require users
+           [org.httpkit.client :as http]
            [clojure.string  :as str]
            [clj-http.client :as http]))
 
@@ -92,7 +93,7 @@ defn get-hidden-links [s]
     re-seq #"(?x)\[\]\(([^\)]*?)\|(.*?)\)" s
 
 defn exists? [n]
-  -> n scp-url (http/get {:throw-exceptions false}) :status (not= 404)
+  -> n scp-url @(http/get {:throw-exceptions false}) :status (not= 404)
 
 defn get-all-links [{:keys [body link_id]}]
   ->> body
