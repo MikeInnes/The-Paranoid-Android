@@ -159,6 +159,7 @@ defn start-global []
 
 defn start []
   try
+    println "booting"
     login! "The-Paranoid-Android" "imsoodepressed"
     set-user-agent! "/r/scp helper by /u/one_more_minute"
 
