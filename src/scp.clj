@@ -129,7 +129,7 @@ defn start-scp []
         filter :links
         domap scp-reply
 
-    catch Exception e (-> e .getMessage println) (start-scp)
+    catch Exception e (-> e .printStackTrace) (start-scp)
 
 ;; ---------------------------
 ;; Catching SCPs across reddit
@@ -151,7 +151,7 @@ defn start-global []
         filter :links
         domap scp-reply
 
-    catch Exception e (-> e .getMessage println) (start-global)
+    catch Exception e (-> e .printStackTrace) (start-global)
 
 ;; ----
 ;; Init
@@ -165,6 +165,6 @@ defn start []
     future : start-scp
     future : start-global
 
-    catch Exception e (-> e .getMessage println) (start)
+    catch Exception e (-> e .printStackTrace) (start)
 
 )
