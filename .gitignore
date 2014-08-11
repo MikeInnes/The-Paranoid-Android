@@ -13,3 +13,5 @@ pom.xml
 log.txt
 logs.txt
 .lein-repl-history
+
+.nrepl-port
