@@ -160,7 +160,7 @@ defn start-global []
 defn start []
   try
     println "booting"
-    login! "The-Paranoid-Android" "imsoodepressed"
+    login! (System/getenv "REDDIT_USER") (System/getenv "REDDIT_PASSWORD")
     set-user-agent! "/r/scp helper by /u/one_more_minute"
 
     future : start-scp
