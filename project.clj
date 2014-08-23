@@ -3,5 +3,5 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [enlive "1.1.5"]
                  [http-kit "2.1.18"]
-                 [mynx "2.0.0-SNAPSHOT"]
-                 [chiara "0.2.0-SNAPSHOT"]])
+                 [mynx "2.0.0"]
+                 [chiara "0.2.0"]])
