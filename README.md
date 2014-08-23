@@ -3,7 +3,7 @@ The-Paranoid-Android
 
 Marvin is a depressed reddit bot. He currently services /r/scp by providing links to SCP articles whenever one is mentioned. And often when one isn't.
 
-Marvin is powered by the Clojure [Mynx](http://github.com/one-more-minute/mynx) library.
+Marvin is powered by the Clojure [mynx](http://github.com/one-more-minute/mynx) library.
 
 ### Running Marvin
 
