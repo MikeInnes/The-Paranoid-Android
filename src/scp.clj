@@ -4,8 +4,7 @@
        reddit.format
        reddit.util
        chiara)
-  (require users
-           [org.httpkit.client :as http]
+  (require [org.httpkit.client :as http]
            [clojure.string  :as str]))
 
 (use-chiara) (chiara
