@@ -16,6 +16,7 @@ lein run -m scp/start
 If you're doing this, please remove all subreddits except for `sandboxtext` from the [code](https://github.com/one-more-minute/The-Paranoid-Android/blob/e2feed5a458dd444464fe62414c8ca70b71d036d/src/scp.clj#L122).
 
 Bitcoin – 1KqaY84xFQx6SzghtGSRUPB64cFoxMnaTB
+
 [Gittip](https://www.gittip.com/one-more-minute/)
 
 Your support helps me pay for server time and the occasional beer – thanks!
