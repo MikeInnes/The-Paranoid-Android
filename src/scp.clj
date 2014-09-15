@@ -49,7 +49,7 @@ defn get-master-quote []
      "Those agents were looking for you again, should I tell them you're not in?"]
 
 defn scp-url [n]
-  str "http://scp-wiki.wikidot.com/scp-" n
+  str "http://scp-wiki.net/scp-" n
 
 defn scp-link [n]
   hyperlink (str "SCP-" n) (scp-url n)
