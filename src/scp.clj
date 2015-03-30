@@ -127,8 +127,8 @@ defn start-scp []
       ->> subreddits subreddit-comments new-items
           map : λ assoc % :links (get-all-links %)
           ; Extra sanity check since Marv's been wandering
-          filter : λ some #{(str/lower-case (:subreddit %))}
-                          (map str/lower-case subreddits)
+          filter : λ (some #{(str/lower-case (:subreddit %))}
+                           (map str/lower-case subreddits))
           filter :links
           domap scp-reply
 
