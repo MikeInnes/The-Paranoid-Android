@@ -112,10 +112,10 @@ defn scp-reply [{:keys [body link_id author links] :as comment}]
           (cond
             (= author "one_more_minute")
               (get-master-quote)
-            (> (count links) 5)
+            (> (count links) 10)
               (str "You're not even going to click on all of those, are you? "
                    "Brain the size of a planet, and this is what they've got me doing...")
-            (< (rand) 1/10)
+            (< (rand) 1/50)
               (get-quote))
     vote comment :up
 
@@ -126,6 +126,8 @@ defn start-scp []
     try
       ->> subreddits subreddit-comments new-items
           map : λ assoc % :links (get-all-links %)
+          ; Extra sanity check since Marv's been wandering
+          filter : λ some #{(symbol (:subreddit %))} subreddits
           filter :links
           domap scp-reply
 
