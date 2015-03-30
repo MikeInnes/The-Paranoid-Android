@@ -132,7 +132,7 @@ defn start-scp []
           domap scp-reply
 
       catch Exception e
-        -> e .printStackTrace
+        -> e .getMessage println
         Thread/sleep : * 5 1000
 
 ;; ---------------------------
@@ -157,7 +157,7 @@ defn start-global []
           domap scp-reply
 
       catch Exception e
-        -> e .printStackTrace
+        -> e .getMessage println
         Thread/sleep : * 5 1000
 
 ;; ----
