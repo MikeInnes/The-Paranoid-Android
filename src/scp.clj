@@ -133,7 +133,7 @@ defn start-scp []
 
       catch Exception e
         -> e .printStackTrace
-        Thread/sleep : * 60 1000
+        Thread/sleep : * 5 1000
 
 ;; ---------------------------
 ;; Catching SCPs across reddit
@@ -158,7 +158,7 @@ defn start-global []
 
       catch Exception e
         -> e .printStackTrace
-        Thread/sleep : * 60 1000
+        Thread/sleep : * 5 1000
 
 ;; ----
 ;; Init
