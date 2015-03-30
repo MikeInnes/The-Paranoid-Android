@@ -122,13 +122,16 @@ defn scp-reply [{:keys [body link_id author links] :as comment}]
 def subreddits '[scp InteractiveFoundation SCP_Game sandboxtest]
 
 defn start-scp []
-  try
-    ->> subreddits subreddit-comments new-items
-        map : λ assoc % :links (get-all-links %)
-        filter :links
-        domap scp-reply
+  while true
+    try
+      ->> subreddits subreddit-comments new-items
+          map : λ assoc % :links (get-all-links %)
+          filter :links
+          domap scp-reply
 
-    catch Exception e (-> e .printStackTrace) (start-scp)
+      catch Exception e
+        -> e .printStackTrace
+        Thread/sleep : * 60 1000
 
 ;; ---------------------------
 ;; Catching SCPs across reddit
@@ -144,13 +147,16 @@ defn get-scp-links [{:keys [body]}]
       seq
 
 defn start-global []
-  try
-    ->> :all subreddit-comments new-items
-        map : λ assoc % :links (get-scp-links %)
-        filter :links
-        domap scp-reply
+  while true
+    try
+      ->> :all subreddit-comments new-items
+          map : λ assoc % :links (get-scp-links %)
+          filter :links
+          domap scp-reply
 
-    catch Exception e (-> e .printStackTrace) (start-global)
+      catch Exception e
+        -> e .printStackTrace
+        Thread/sleep : * 60 1000
 
 ;; ----
 ;; Init
@@ -165,6 +171,8 @@ defn start []
     future : start-scp
     future : start-global
 
-    catch Exception e (-> e .printStackTrace) (start)
+    catch Exception e
+      -> e .printStackTrace
+      Thread/sleep : * 60 1000
 
 )
