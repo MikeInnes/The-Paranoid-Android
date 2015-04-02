@@ -72,7 +72,7 @@ defn get-nums
            (?<! `               )   # Not preceded by `
            \d+                      # The number
            (?: - [a-zA-Z0-9-]*  )?  # Optional extensions
-           (?! `                )   # Not followed by a `
+           (?! `%               )   # Not followed by a special chars
            (?! \.\d | \d | \,\d )   # Not followed by a decimal point or digit"
          remove-links s
 
