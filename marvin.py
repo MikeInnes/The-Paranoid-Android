@@ -97,10 +97,12 @@ while True:
                     if "The-Paranoid-Android" in map(lambda x: x.author.name, comment.replies):
                         continue
                     reply = ", ".join(links) + "."
-                    if random.random() < 1/50.:
+                    if len(links) > 10:
+                        reply += "\n\nYou're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
+                    elif random.random() < 1/50.:
                         reply += "\n\n" + get_quote()
-                    comment.upvote()
                     comment.reply(reply)
+                    comment.upvote()
                     print reply
                     print
         except Exception, e:
