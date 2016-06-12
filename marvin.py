@@ -94,7 +94,7 @@ while True:
                 links = get_links(comment.body)
                 if len(links) > 0:
                     comment.refresh()
-                    if "The-Paranoid-Android" in map(lambda x: x.author.name, comment.replies):
+                    if "The-Paranoid-Android" in map(lambda x: x.author.name if x.author else "[deleted]", comment.replies):
                         continue
                     reply = ", ".join(links) + "."
                     if len(links) > 10:
