@@ -88,22 +88,26 @@ def get_quote():
         return quote
 
 while True:
-    for sub in ['scp', 'InteractiveFoundation', 'SCP_Game', 'sandboxtest', 'SCP682']:
-        try:
-            for comment in r.get_subreddit(sub).get_comments(limit=100):
-                links = get_links(comment.body)
-                if len(links) > 0:
-                    comment.refresh()
-                    if "The-Paranoid-Android" in map(lambda x: x.author.name if x.author else "[deleted]", comment.replies):
-                        continue
-                    reply = ", ".join(links) + "."
-                    if len(links) > 10:
-                        reply += "\n\nYou're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
-                    elif random.random() < 1/50.:
-                        reply += "\n\n" + get_quote()
+    sub = '+'.join(['scp', 'InteractiveFoundation', 'SCP_Game', 'sandboxtest', 'SCP682'])
+    try:
+        for comment in r.get_comments(sub, limit=100):
+            links = get_links(comment.body)
+            if len(links) > 0 and comment.created_utc > (time() - 60):
+                comment.refresh()
+                if "The-Paranoid-Android" in map(lambda x: x.author.name if x.author else "[deleted]", comment.replies):
+                    continue
+                reply = ", ".join(links) + "."
+                if len(links) > 10:
+                    reply += "\n\nYou're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
+                elif random.random() < 1/50.:
+                    reply += "\n\n" + get_quote()
+                print reply
+                print
+                try:
                     comment.reply(reply)
                     comment.upvote()
-                    print reply
-                    print
-        except Exception, e:
-            print e
+                except Exception, e:
+                    print 'respond error:'
+                    print e
+    except Exception, e:
+        print e
