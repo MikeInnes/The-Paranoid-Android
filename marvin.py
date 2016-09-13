@@ -1,7 +1,7 @@
 import praw
 import re
 import requests
-from time import time
+from time import time, sleep
 import random
 import sys
 
@@ -42,7 +42,7 @@ def get_nums(s):
                           (?<! `               )   # Not preceded by `
                           \d+                      # The number
                           (?: - [a-zA-Z0-9-]*  )?  # Optional extensions
-                          (?! `%               )   # Not followed by a special chars
+                          (?! ` | %            )   # Not followed by a special chars
                           (?! \.\d | \d | \,\d )   # Not followed by a decimal point or digit
                           """, remove_links(s))
 
@@ -87,27 +87,29 @@ def get_quote():
     else:
         return quote
 
-while True:
-    sub = '+'.join(['scp', 'InteractiveFoundation', 'SCP_Game', 'sandboxtest', 'SCP682'])
-    try:
-        for comment in r.get_comments(sub, limit=100):
-            links = get_links(comment.body)
-            if len(links) > 0 and comment.created_utc > (time() - 60):
-                comment.refresh()
-                if "The-Paranoid-Android" in map(lambda x: x.author.name if x.author else "[deleted]", comment.replies):
-                    continue
-                reply = ", ".join(links) + "."
-                if len(links) > 10:
-                    reply += "\n\nYou're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
-                elif random.random() < 1/50.:
-                    reply += "\n\n" + get_quote()
-                print reply
-                print
-                try:
-                    comment.reply(reply)
-                    comment.upvote()
-                except Exception, e:
-                    print 'respond error:'
-                    print e
-    except Exception, e:
-        print e
+if __name__ == "__main__":
+    while True:
+	sub = '+'.join(['scp', 'InteractiveFoundation', 'SCP_Game', 'sandboxtest', 'SCP682'])
+	sleep(1)
+	try:
+	    for comment in r.get_comments(sub, limit=100):
+		links = get_links(comment.body)
+		if len(links) > 0 and comment.created_utc > (time() - 60):
+		    comment.refresh()
+		    if "The-Paranoid-Android" in map(lambda x: x.author.name if x.author else "[deleted]", comment.replies):
+			continue
+		    reply = ", ".join(links) + "."
+		    if len(links) > 10:
+			reply += "\n\nYou're not even going to click on all of those, are you? Brain the size of a planet, and this is what they've got me doing..."
+		    elif random.random() < 1/50.:
+			reply += "\n\n" + get_quote()
+		    print reply
+		    print
+		    try:
+			comment.reply(reply)
+			comment.upvote()
+		    except Exception, e:
+			print 'respond error:'
+			print e
+	except Exception, e:
+	    print e
