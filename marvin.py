@@ -94,13 +94,15 @@ def get_quote():
 
 if __name__ == "__main__":
 	while True:
-		sub = '+'.join(['scp', 'InteractiveFoundation', 'SCP_Game', 'sandboxtest', 'SCP682', 'DankMemesFromSite19'])
+		sub = '+'.join(['scp', 'InteractiveFoundation', 'SCP_Game', 'sandboxtest', 'SCP682', 'DankMemesFromSite19', 'WholesomeSite19Memes', 'okbuddyredacted'])
 		sleep(10)
 		try:
 			for comment in r.subreddit(sub).stream.comments():
 				links = get_links(comment.body)
 				if len(links) > 0 and comment.created_utc > (time() - 60):
 					comment.refresh()
+					if comment.author and comment.author.name == "TSATPWTCOTTTADC":
+						continue
 					if "The-Paranoid-Android" in map(lambda x: x.author.name if x.author else "[deleted]", comment.replies):
 						continue
 					if "MicroArchitecture" in map(lambda x: x.author.name if x.author else "[deleted]", comment.replies):
